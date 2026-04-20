@@ -1,0 +1,2972 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Forge. L'associé que tu n'as pas encore recruté | ELUMA</title>
+<meta name="description" content="Tu fais du chiffre mais tu stagnes. Et si le problème n'était pas ta méthode, mais ton regard sur toi-même ? Pré-audit offert de 45 min avec Mehdi Benlahoucine, fondateur d'ELUMA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   TOKENS ELUMA . Design System V6.2
+   ============================================ */
+:root {
+  --deep: #343A3F;
+  --ink: #1A1E21;           /* texte contraste fort (Niveau 1) */
+  --text: #202629;
+  --muted: #8A8579;         /* texte secondaire (légendes, cartouches) */
+  --bg: #F6F2EC;
+  --bg2: #E6DED6;
+  --red: #E13B56;
+  --red-deep: #B82B42;
+  --soft: #CDBFB6;
+  --serif: 'Noto Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --display: 'Archivo', 'DM Sans', system-ui, sans-serif;
+}
+
+/* Accessibility — reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rev { opacity: 1 !important; transform: none !important; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg2);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   BARRE DE PROGRESSION
+   ============================================ */
+#prog {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--red);
+  z-index: 999;
+  transition: width .1s linear;
+}
+
+/* ============================================
+   WATERMARK ELUMA FLOTTANT
+   ============================================ */
+.bg-eluma {
+  position: fixed;
+  bottom: -0.06em; right: -0.03em;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(210px, 34vw, 440px);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(52,58,63,0.052);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+   EN-TÊTE DESTRUCTURÉE
+   ============================================ */
+.header {
+  background: var(--deep);
+  padding: 4rem 8vw 6rem;
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 3% 100%, 0 95%);
+  overflow: hidden;
+  position: relative;
+  color: var(--bg);
+}
+/* Cercles concentriques — signature visuelle ELUMA (remplace diamants) */
+.hd {
+  position: absolute;
+  width: 340px; height: 340px;
+  right: -120px; top: -120px;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(225,59,86,0.92) 0%,
+    rgba(225,59,86,0.92) 28%,
+    transparent 28.5%,
+    transparent 46%,
+    rgba(225,59,86,0.55) 46.5%,
+    rgba(225,59,86,0.55) 58%,
+    transparent 58.5%,
+    transparent 72%,
+    rgba(225,59,86,0.25) 72.5%,
+    rgba(225,59,86,0.25) 82%,
+    transparent 82.5%);
+  opacity: 0;
+  animation: concentric-in 1.4s cubic-bezier(.2,.8,.2,1) .3s forwards;
+}
+.hd-sm {
+  position: absolute;
+  width: 120px; height: 120px;
+  right: 80px; bottom: 90px;
+  z-index: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(225,59,86,0.45);
+  box-shadow:
+    inset 0 0 0 1.5px transparent,
+    0 0 0 10px transparent,
+    0 0 0 11.5px rgba(225,59,86,0.28),
+    0 0 0 22px transparent,
+    0 0 0 23.5px rgba(225,59,86,0.15);
+  opacity: 0;
+  animation: concentric-in 1.4s cubic-bezier(.2,.8,.2,1) .55s forwards;
+}
+@keyframes concentric-in {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.hd-ghost {
+  position: absolute;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(72px, 13vw, 140px);
+  color: rgba(246,242,236,0.05);
+  right: -0.02em; bottom: -0.06em;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.logo {
+  position: relative; z-index: 1;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 3rem;
+}
+.logo-dot { color: var(--red); }
+.header-sub {
+  position: relative; z-index: 1;
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(246,242,236,0.65);
+  margin-bottom: 1.8rem;
+}
+.header-title {
+  position: relative; z-index: 1;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  color: var(--bg);
+}
+.header-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(225,59,86,0.98);
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 0.92em;
+}
+.header-lead {
+  position: relative; z-index: 1;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(246,242,236,0.84);
+  max-width: 640px;
+  margin-top: 1.8rem;
+}
+.header-lead strong {
+  color: var(--bg);
+  font-weight: 600;
+}
+.header-punchline {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(246,242,236,0.84);
+  margin-top: 1.4rem;
+  font-style: italic;
+  border-left: 3px solid var(--red);
+  padding-left: 1rem;
+}
+.header-punchline strong {
+  font-style: normal;
+  font-weight: 600;
+}
+.header-cta {
+  position: relative; z-index: 1;
+  margin-top: 2.5rem;
+}
+
+/* ============================================
+   BOUTON CTA PRINCIPAL
+   ============================================ */
+.btn-cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 2.5rem;
+  background: var(--red);
+  color: var(--bg);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 8px 24px rgba(225,59,86,0.32);
+}
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--deep);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s ease;
+}
+.btn-cta:hover::before { transform: scaleX(1); transform-origin: left center; }
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(225,59,86,0.42); }
+.btn-cta span, .btn-cta .arr { position: relative; z-index: 1; }
+.btn-cta .arr { font-size: 1.15rem; transition: transform 0.3s; }
+.btn-cta:hover .arr { transform: translateX(6px); }
+
+.btn-cta-sub {
+  display: block;
+  margin-top: 1rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: rgba(246,242,236,0.62);
+  letter-spacing: 0.08em;
+}
+
+/* ============================================
+   WRAPPER GLOBAL
+   ============================================ */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .wrap { padding: 0 1.5rem; }
+}
+
+/* ============================================
+   SECTION & CARTES
+   ============================================ */
+.section {
+  margin: 5.5rem 0;
+}
+.section-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--soft);
+  opacity: 0.55;
+}
+.section-label {
+  font-family: var(--display);
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--soft);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Titre éditorial serif (émotionnel, court) */
+.section-title-editorial {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+  line-height: 1.18;
+  color: var(--deep);
+  margin-bottom: 1.5rem;
+  max-width: 860px;
+  letter-spacing: -0.005em;
+}
+.section-title-editorial em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+}
+
+/* Titre impact display (plus long, percutant) */
+.section-title-impact {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--deep);
+  margin-bottom: 1.5rem;
+  max-width: 920px;
+}
+.section-title-impact em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0;
+}
+
+.section-intro {
+  max-width: 760px;
+  margin: 1.5rem auto 2.5rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  text-align: left;
+}
+.section-intro strong {
+  font-weight: 600;
+}
+
+.card {
+  background: var(--bg);
+  padding: 2.2rem 2.8rem;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 3px rgba(52,58,63,0.04),
+    0 6px 28px rgba(52,58,63,0.09);
+  transition: box-shadow 0.35s ease;
+}
+
+/* ============================================
+   COMPOSANT PHRASE-CLÉ (signature visuelle forte)
+   ============================================ */
+.key {
+  position: relative;
+  background: var(--bg);
+  padding: 2.2rem 2.8rem 2.2rem 3.2rem;
+  margin: 2.8rem 0;
+  border-left: 6px solid var(--red);
+  box-shadow:
+    0 2px 4px rgba(52,58,63,0.05),
+    0 14px 40px rgba(52,58,63,0.11),
+    0 30px 80px rgba(225,59,86,0.06);
+  border-radius: 0 2px 2px 0;
+}
+.key::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -14px;
+  width: 22px; height: 22px;
+  background: var(--red);
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(225,59,86,0.35);
+}
+.key p {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--deep);
+  letter-spacing: -0.015em;
+}
+.key p em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0;
+}
+.key-highlight {
+  background: linear-gradient(120deg, rgba(225,59,86,0.12) 0%, rgba(225,59,86,0.18) 100%);
+  padding: 0.05em 0.35em;
+  font-weight: 700;
+}
+
+/* ============================================
+   SECTION 2. AMPLIFICATION (douleurs)
+   ============================================ */
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 720px) {
+  .pain-grid { grid-template-columns: 1fr; }
+}
+.pain-card {
+  background: var(--bg);
+  padding: 1.8rem 2rem;
+  border-left: 3px solid var(--red);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pain-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(52,58,63,0.06), 0 14px 40px rgba(52,58,63,0.14);
+}
+.pain-scene {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--deep);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+.pain-text {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--text);
+  opacity: 0.86;
+  line-height: 1.7;
+}
+
+.data-bar {
+  background: var(--deep);
+  color: var(--bg);
+  padding: 2.3rem 2.8rem;
+  margin: 3rem 0 0;
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(52,58,63,0.18);
+}
+.data-bar::after {
+  content: '';
+  position: absolute;
+  right: -50px; top: -50px;
+  width: 120px; height: 120px;
+  background: var(--red);
+  transform: rotate(45deg);
+  opacity: 0.15;
+}
+.data-stat {
+  position: relative; z-index: 1;
+}
+.data-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+.data-label {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: rgba(246,242,236,0.82);
+  line-height: 1.55;
+}
+.data-source {
+  display: block;
+  text-align: right;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.8rem;
+  opacity: 0.7;
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   SECTION 3. DIAGNOSTIC
+   ============================================ */
+.diagnostic-block {
+  background: var(--bg);
+  padding: 3rem 3.5rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  position: relative;
+  overflow: hidden;
+}
+.diagnostic-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--red);
+}
+.diagnostic-rupture {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  color: var(--deep);
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.015em;
+}
+.diagnostic-rupture em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0;
+}
+.diagnostic-body p {
+  margin-bottom: 1.1rem;
+  color: var(--text);
+  opacity: 0.92;
+  line-height: 1.75;
+}
+.diagnostic-body p:last-child { margin-bottom: 0; }
+.diagnostic-body strong {
+  color: var(--deep);
+  font-weight: 600;
+}
+
+/* ============================================
+   SECTION 4. MIROIR FONDATEUR
+   ============================================ */
+.mirror-wrap {
+  background: var(--deep);
+  padding: 4rem 4rem;
+  border-radius: 2px;
+  color: var(--bg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(52,58,63,0.25);
+}
+.mirror-wrap::before {
+  content: 'ELUMA';
+  position: absolute;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(140px, 20vw, 260px);
+  color: rgba(246,242,236,0.04);
+  top: 50%; right: -0.05em;
+  transform: translateY(-50%);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+.mirror-content {
+  position: relative; z-index: 1;
+  max-width: 820px;
+}
+.mirror-pill {
+  display: inline-block;
+  background: var(--red);
+  color: var(--bg);
+  padding: 0.32rem 0.9rem;
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.mirror-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  line-height: 1.15;
+  margin-bottom: 1.8rem;
+  letter-spacing: -0.02em;
+}
+.mirror-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(225,59,86,0.98);
+  letter-spacing: 0;
+}
+.mirror-body p {
+  margin-bottom: 1.2rem;
+  color: rgba(246,242,236,0.9);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+.mirror-body strong {
+  color: var(--bg);
+  font-weight: 600;
+}
+.mirror-body em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: rgba(225,59,86,0.95);
+}
+
+.mirror-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.8rem;
+  margin: 2.4rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(246,242,236,0.12);
+  border-bottom: 1px solid rgba(246,242,236,0.12);
+}
+.fact-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+.fact-label {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: rgba(246,242,236,0.72);
+  line-height: 1.5;
+}
+
+/* ============================================
+   SECTION 5. LA FORGE (offre)
+   ============================================ */
+.forge-intro {
+  margin-bottom: 3rem;
+  padding: 2rem 2.5rem;
+  background: var(--bg);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  border-top: 3px solid var(--red);
+}
+.forge-not {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  color: var(--deep);
+  opacity: 0.55;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.forge-not .strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+.forge-is {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  color: var(--deep);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.forge-is em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+  margin: 2.8rem 0;
+}
+.pillar {
+  background: var(--bg);
+  padding: 2.5rem 2.3rem 2.3rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
+}
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: var(--red);
+}
+.pillar:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 2px 4px rgba(52,58,63,0.05), 0 20px 60px rgba(52,58,63,0.16);
+}
+.pillar-num-big {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 3.5rem;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.03em;
+}
+.pillar-num-ghost {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 5rem;
+  color: var(--soft);
+  opacity: 0.22;
+  line-height: 1;
+  pointer-events: none;
+}
+.pillar-tag {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+.pillar-icon {
+  width: 46px;
+  height: 46px;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+  position: relative;
+}
+.pillar-icon svg {
+  width: 22px; height: 22px;
+  fill: var(--bg);
+}
+.pillar-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--deep);
+  margin-bottom: 0.9rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.pillar-text {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--text);
+  opacity: 0.88;
+  line-height: 1.7;
+}
+.pillar-text strong { color: var(--deep); font-weight: 600; }
+
+.timing-bar {
+  background: var(--bg);
+  padding: 2.2rem 2.6rem;
+  margin: 3rem 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  border-left: 4px solid var(--red);
+}
+.timing-bar h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.2rem;
+}
+.timing-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+}
+.timing-block {
+  display: flex;
+  flex-direction: column;
+}
+.timing-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--deep);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.timing-sub {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--soft);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+}
+.timing-arrow {
+  color: var(--red);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.ia-block {
+  background: linear-gradient(135deg, var(--deep) 0%, #2a2f33 100%);
+  color: var(--bg);
+  padding: 2.8rem 3.2rem;
+  border-radius: 2px;
+  margin: 2.8rem 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 44px rgba(52,58,63,0.2);
+}
+.ia-block::after {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  background: var(--red);
+  transform: rotate(45deg);
+  right: -80px; top: -80px;
+  opacity: 0.2;
+}
+.ia-tag {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+  position: relative; z-index: 1;
+}
+.ia-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+  margin-bottom: 1.5rem;
+  position: relative; z-index: 1;
+  letter-spacing: -0.02em;
+}
+.ia-calc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 1.5rem 0;
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 700;
+  position: relative; z-index: 1;
+  letter-spacing: -0.015em;
+}
+.ia-calc-num {
+  color: var(--red);
+}
+.ia-calc-op {
+  color: rgba(246,242,236,0.5);
+  font-weight: 500;
+}
+.ia-text {
+  color: rgba(246,242,236,0.82);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  position: relative; z-index: 1;
+}
+
+.contrast-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+@media (max-width: 700px) { .contrast-block { grid-template-columns: 1fr; } }
+.contrast-col {
+  padding: 2rem 2.2rem;
+  border-radius: 2px;
+  position: relative;
+}
+.contrast-before {
+  background: var(--bg2);
+  border: 1px dashed var(--soft);
+  opacity: 0.88;
+}
+.contrast-after {
+  background: var(--bg);
+  border: 2px solid var(--red);
+  box-shadow: 0 2px 4px rgba(225,59,86,0.08), 0 12px 40px rgba(225,59,86,0.15);
+}
+.contrast-label {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2px;
+}
+.contrast-before .contrast-label {
+  color: var(--soft);
+  background: rgba(205,191,182,0.2);
+}
+.contrast-after .contrast-label {
+  color: var(--bg);
+  background: var(--red);
+}
+.contrast-col ul {
+  list-style: none;
+  padding: 0;
+}
+.contrast-col li {
+  padding: 0.55rem 0;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0.88;
+  position: relative;
+  padding-left: 1.8rem;
+}
+.contrast-before li::before {
+  content: '✗';
+  position: absolute; left: 0;
+  color: var(--soft);
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+.contrast-after li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: var(--red);
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+/* ============================================
+   SECTION 6. PREUVES
+   ============================================ */
+.proof-credo {
+  background: var(--bg);
+  padding: 2.8rem 3rem;
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  border-left: 4px solid var(--red);
+}
+.proof-credo-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+  color: var(--deep);
+  margin-bottom: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.proof-credo-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--red);
+  letter-spacing: 0;
+}
+.proof-credo-body p {
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+.proof-credo-body p:last-child { margin-bottom: 0; }
+.proof-credo-body strong {
+  color: var(--deep);
+  font-weight: 600;
+}
+.proof-credo-body em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--red);
+}
+
+.pillars-proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.3rem;
+  margin: 2rem 0;
+}
+.pillar-proof {
+  background: var(--bg);
+  padding: 1.8rem 2rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
+  border-top: 3px solid var(--red);
+  transition: transform 0.3s ease;
+}
+.pillar-proof:hover { transform: translateY(-3px); }
+.pillar-proof-tag {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.9rem;
+}
+.pillar-proof-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--deep);
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.01em;
+}
+.pillar-proof-text {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.65;
+  opacity: 0.88;
+}
+
+.testimonials-placeholder {
+  background: var(--bg2);
+  border: 1px dashed var(--soft);
+  padding: 2.5rem 3rem;
+  border-radius: 2px;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+.testimonials-placeholder p {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--soft);
+  font-size: 0.98rem;
+}
+.testimonials-placeholder em {
+  color: var(--deep);
+  opacity: 0.65;
+}
+
+/* ============================================
+   SECTION 7. ENCART CONJOINT
+   ============================================ */
+.spouse-card {
+  background: linear-gradient(135deg, #F0E6F6 0%, #E8DDF0 100%);
+  border: 1px solid rgba(155, 89, 182, 0.25);
+  padding: 2.8rem 3.2rem;
+  border-radius: 2px;
+  margin: 3rem 0;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(52,58,63,0.04), 0 12px 40px rgba(155,89,182,0.12);
+  overflow: hidden;
+}
+.spouse-card::after {
+  content: '❤';
+  position: absolute;
+  right: 2rem; top: 2rem;
+  font-size: 3.5rem;
+  color: rgba(155,89,182,0.12);
+  line-height: 1;
+}
+.spouse-tag {
+  display: inline-block;
+  background: #9B59B6;
+  color: #fff;
+  padding: 0.3rem 0.9rem;
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-bottom: 1.3rem;
+}
+.spouse-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+  color: var(--deep);
+  line-height: 1.25;
+  margin-bottom: 1.3rem;
+  letter-spacing: -0.015em;
+}
+.spouse-body p {
+  color: var(--text);
+  opacity: 0.9;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.spouse-body p:last-child { margin-bottom: 0; }
+.spouse-body strong {
+  color: var(--deep);
+  font-weight: 600;
+}
+
+.spouse-options {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.spouse-option {
+  background: rgba(255,255,255,0.55);
+  padding: 1.1rem 1.4rem;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  transition: background 0.25s, transform 0.2s;
+  border: 2px solid transparent;
+  font-family: var(--sans);
+}
+.spouse-option:hover {
+  background: rgba(255,255,255,0.85);
+  transform: translateX(3px);
+}
+.spouse-option.selected {
+  background: rgba(255,255,255,0.95);
+  border-color: #9B59B6;
+}
+.spouse-option-check {
+  width: 22px; height: 22px;
+  border: 2px solid #9B59B6;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: background 0.25s;
+  position: relative;
+}
+.spouse-option.selected .spouse-option-check {
+  background: #9B59B6;
+}
+.spouse-option.selected .spouse-option-check::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.spouse-option-label {
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.spouse-option-label strong {
+  display: block;
+  color: var(--deep);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.spouse-option-label em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: #9B59B6;
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   SECTION 8. POUR TOI / PAS POUR TOI
+   ============================================ */
+.fit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+@media (max-width: 700px) { .fit-grid { grid-template-columns: 1fr; } }
+
+.fit-col {
+  padding: 2.5rem 2.6rem;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease;
+}
+.fit-col:hover { transform: translateY(-4px); }
+
+.fit-yes {
+  background: var(--deep);
+  color: var(--bg);
+  clip-path: polygon(0 0, 100% 0, 100% 97%, 3% 100%);
+  box-shadow: 0 14px 44px rgba(52,58,63,0.2), 0 24px 60px rgba(225,59,86,0.08);
+}
+.fit-yes::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 140px; height: 140px;
+  background: var(--red);
+  transform: rotate(45deg) translate(50%, -50%);
+  opacity: 0.25;
+}
+.fit-yes::after {
+  content: '';
+  position: absolute;
+  bottom: 20px; right: 20px;
+  width: 44px; height: 44px;
+  border: 2px solid rgba(225,59,86,0.5);
+  transform: rotate(45deg);
+}
+
+.fit-no {
+  background: var(--bg);
+  border: 1px dashed var(--soft);
+  opacity: 0.94;
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 0 97%);
+}
+
+.fit-header {
+  position: relative; z-index: 1;
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.fit-yes .fit-header {
+  color: var(--bg);
+  background: var(--red);
+}
+.fit-no .fit-header {
+  color: var(--soft);
+  background: rgba(205,191,182,0.2);
+}
+.fit-title {
+  position: relative; z-index: 1;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.015em;
+}
+.fit-yes .fit-title { color: var(--bg); }
+.fit-no .fit-title { color: var(--deep); }
+.fit-col ul {
+  list-style: none;
+  padding: 0;
+  position: relative; z-index: 1;
+}
+.fit-col li {
+  padding: 0.7rem 0;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-left: 2rem;
+  position: relative;
+}
+.fit-yes li {
+  color: rgba(246,242,236,0.92);
+  border-bottom: 1px solid rgba(246,242,236,0.08);
+}
+.fit-yes li:last-child { border-bottom: none; }
+.fit-no li {
+  color: var(--text);
+  opacity: 0.82;
+}
+.fit-yes li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 1.15em;
+  width: 12px; height: 12px;
+  background: var(--red);
+  transform: rotate(45deg);
+}
+.fit-no li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--soft);
+  font-weight: bold;
+  font-family: var(--sans);
+}
+
+/* ============================================
+   SECTION 9. CTA FINAL
+   ============================================ */
+.final-cta {
+  background: var(--deep);
+  color: var(--bg);
+  padding: 4.5rem 4rem;
+  margin: 5rem 0;
+  border-radius: 2px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(52,58,63,0.24);
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  background: var(--red);
+  transform: rotate(45deg);
+  right: -110px; top: -110px;
+  opacity: 0.88;
+}
+.final-cta::after {
+  content: '';
+  position: absolute;
+  width: 60px; height: 60px;
+  border: 2.5px solid rgba(225,59,86,0.45);
+  transform: rotate(45deg);
+  right: 110px; bottom: 60px;
+}
+.final-cta-content {
+  position: relative; z-index: 1;
+  max-width: 720px;
+}
+.final-cta-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: 1.6rem;
+  letter-spacing: -0.025em;
+}
+.final-cta-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(246,242,236,0.98);
+  background: linear-gradient(120deg, transparent 0%, transparent 30%, rgba(225,59,86,0.7) 30%, rgba(225,59,86,0.7) 100%);
+  padding: 0.05em 0.3em;
+  letter-spacing: 0;
+}
+.final-cta-desc {
+  color: rgba(246,242,236,0.85);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.final-cta-desc strong { color: var(--bg); }
+.risk-box {
+  background: rgba(246,242,236,0.06);
+  border-left: 3px solid var(--red);
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+  border-radius: 2px;
+}
+.risk-box p {
+  color: rgba(246,242,236,0.92);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  margin: 0;
+}
+.risk-box strong { color: var(--bg); }
+.risk-box em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: rgba(225,59,86,0.95);
+}
+
+/* ============================================
+   SECTION 10. FAQ
+   ============================================ */
+.faq-item {
+  background: var(--bg);
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 20px rgba(52,58,63,0.06);
+  transition: box-shadow 0.3s ease;
+  border-left: 3px solid transparent;
+}
+.faq-item.open {
+  box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 12px 40px rgba(52,58,63,0.14);
+  border-left-color: var(--red);
+}
+.faq-q {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--deep);
+  line-height: 1.5;
+  transition: color 0.25s;
+  letter-spacing: -0.01em;
+}
+.faq-q:hover { color: var(--red); }
+.faq-plus {
+  flex-shrink: 0;
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  color: var(--red);
+  transition: transform 0.35s ease;
+  line-height: 1;
+  font-weight: 300;
+}
+.faq-item.open .faq-plus { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, padding 0.3s ease;
+  padding: 0 2rem;
+}
+.faq-item.open .faq-a {
+  max-height: 900px;
+  padding: 0 2rem 1.8rem;
+}
+.faq-a p {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 0.9rem;
+}
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a strong { color: var(--deep); font-weight: 600; }
+.faq-a em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--red);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--deep);
+  color: rgba(246,242,236,0.6);
+  padding: 3rem 3rem 2.5rem;
+  text-align: center;
+  margin-top: 5rem;
+  position: relative;
+  z-index: 2;
+}
+footer .footer-logo {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  color: var(--bg);
+  margin-bottom: 0.8rem;
+}
+footer .footer-logo span { color: var(--red); }
+footer p {
+  font-family: var(--sans);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+footer .footer-tag {
+  font-family: var(--serif);
+  font-style: italic;
+  color: rgba(246,242,236,0.55);
+  font-size: 0.92rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   EXIT INTENT MODAL
+   ============================================ */
+.exit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(32,38,41,0.78);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.35s ease;
+}
+.exit-modal.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.exit-modal-box {
+  background: var(--bg);
+  padding: 3rem 3rem;
+  max-width: 540px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  animation: slideUp 0.4s ease;
+  border-top: 4px solid var(--red);
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.exit-close {
+  position: absolute;
+  top: 0.8rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--soft);
+  cursor: pointer;
+  transition: color 0.25s;
+  line-height: 1;
+}
+.exit-close:hover { color: var(--red); }
+.exit-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--deep);
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.exit-title em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--red);
+  font-weight: 500;
+}
+.exit-desc {
+  color: var(--text);
+  opacity: 0.88;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+}
+.exit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.exit-input {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--soft);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  background: var(--bg2);
+  color: var(--text);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.exit-input:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(225,59,86,0.15);
+}
+.exit-submit {
+  padding: 1rem 1.5rem;
+  background: var(--red);
+  color: var(--bg);
+  border: none;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.25s, transform 0.2s;
+}
+.exit-submit:hover { background: var(--deep); transform: translateY(-2px); }
+
+/* ============================================
+   SCROLL-REVEAL
+   ============================================ */
+.rev {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.rev.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 700px) {
+  .header { padding: 3rem 6vw 5rem; clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%); }
+  .hd { width: 180px; height: 180px; right: -60px; top: -60px; }
+  .hd-sm { right: 50px; bottom: 140px; width: 48px; height: 48px; }
+  .card, .pillar, .fit-col { padding: 1.8rem 1.6rem; }
+  .diagnostic-block, .mirror-wrap, .final-cta, .spouse-card, .proof-credo, .ia-block, .forge-intro { padding: 2rem 1.8rem; }
+  .section { margin: 4rem 0; }
+  .data-bar { padding: 1.6rem 1.8rem; }
+  .timing-flow { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .timing-arrow { transform: rotate(90deg); }
+  .exit-modal-box { padding: 2rem 1.8rem; }
+  .exit-title { font-size: 1.3rem; }
+  .mirror-facts { padding: 1.2rem 0; }
+  .fact-num { font-size: 1.7rem; }
+  .key { padding: 1.8rem 1.8rem 1.8rem 2.2rem; }
+}
+
+/* ============================================
+   V6.2 — NEUROMAP COMPONENTS
+   ============================================ */
+
+/* Bandeau signature sous header — ancrage émotionnel */
+.bandeau {
+  background: var(--bg);
+  padding: 1.4rem 8vw;
+  border-top: 1px solid rgba(52,58,63,0.06);
+  border-bottom: 1px solid rgba(52,58,63,0.06);
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: var(--deep);
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.bandeau::before,
+.bandeau::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--red);
+  vertical-align: middle;
+  margin: 0 1.2rem;
+  opacity: 0.55;
+}
+
+/* Pain-cards numérotation fantôme — stimulus VISUEL + CONTRASTABLE */
+.pain-card {
+  position: relative;
+  overflow: hidden;
+}
+.pain-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -0.35em;
+  right: 0.08em;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(5rem, 9vw, 8rem);
+  color: rgba(225,59,86,0.07);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.pain-card > * { position: relative; z-index: 1; }
+
+/* Moment typographique — pivot (émotionnel fort) */
+.moment-pivot {
+  margin: 4rem -2vw;
+  padding: 4.5rem 2rem;
+  text-align: center;
+  background: var(--bg);
+  border-top: 1px solid rgba(52,58,63,0.08);
+  border-bottom: 1px solid rgba(52,58,63,0.08);
+  position: relative;
+}
+.moment-pivot p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.8vw, 2.8rem);
+  line-height: 1.25;
+  color: var(--deep);
+  max-width: 900px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+.moment-pivot p em {
+  color: var(--red);
+  font-style: italic;
+}
+.moment-pivot::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 1.4rem;
+  width: 48px;
+  height: 2px;
+  background: var(--red);
+  transform: translateX(-50%);
+}
+
+/* Moment signature — punchline finale miroir */
+.moment-signature {
+  margin: 3rem 0 0;
+  padding: 3.2rem 2.4rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--deep) 0%, #2B3135 100%);
+  color: var(--bg);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 52px rgba(52,58,63,0.22);
+}
+.moment-signature::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(225,59,86,0.5) 0%,
+    rgba(225,59,86,0.5) 30%,
+    transparent 30.5%,
+    transparent 50%,
+    rgba(225,59,86,0.25) 50.5%,
+    rgba(225,59,86,0.25) 64%,
+    transparent 64.5%);
+  pointer-events: none;
+}
+.moment-signature p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+.moment-signature p strong {
+  color: var(--red);
+  font-style: normal;
+  font-weight: 700;
+  font-family: var(--display);
+}
+
+/* Photos cadrées — retouche CSS (duotone + filter + frame) */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.4rem;
+  margin: 2.4rem 0;
+}
+.photo-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--deep);
+  box-shadow:
+    0 1px 3px rgba(52,58,63,0.12),
+    0 10px 36px rgba(52,58,63,0.18);
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+.photo-frame:hover { transform: translateY(-4px); }
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.08) saturate(0.78) brightness(0.96);
+  transition: filter 0.5s ease, transform 0.6s ease;
+}
+.photo-frame:hover img { filter: contrast(1.12) saturate(0.88) brightness(1); transform: scale(1.03); }
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+    rgba(225,59,86,0.14) 0%,
+    rgba(52,58,63,0.18) 55%,
+    rgba(52,58,63,0.55) 100%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+.photo-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(26,30,33,0.85) 100%);
+  color: var(--bg);
+  font-family: var(--display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 2;
+  line-height: 1.4;
+}
+
+/* Cartouches typographiques anonymes — stimulus TANGIBLE sans trahir */
+.cartouches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 2.2rem 0;
+}
+.cartouche {
+  padding: 1.5rem 1.6rem;
+  border-left: 3px solid var(--red);
+  background: rgba(205,191,182,0.18);
+  font-family: var(--display);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--deep);
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  transition: background 0.3s ease;
+}
+.cartouche:hover { background: rgba(205,191,182,0.32); }
+.cartouche-date {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+/* Logos crédibilité (Shaka + CES typographique) */
+.creds-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+  margin: 2.5rem 0 1rem;
+  padding: 1.8rem 1.2rem;
+  border-top: 1px solid rgba(52,58,63,0.1);
+  border-bottom: 1px solid rgba(52,58,63,0.1);
+}
+.cred-pill {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0.72;
+  transition: opacity 0.3s ease;
+}
+.cred-pill:hover { opacity: 1; }
+.cred-pill-label {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  color: var(--deep);
+  text-transform: uppercase;
+}
+.cred-pill-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.cred-pill svg { width: 56px; height: 56px; }
+
+/* Tracker screenshots — preuve TANGIBLE de l'IA */
+.tracker-showcase {
+  margin: 2.2rem 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+.tracker-frame {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--deep);
+  padding: 0.35rem;
+  box-shadow:
+    0 1px 3px rgba(52,58,63,0.12),
+    0 14px 42px rgba(52,58,63,0.2);
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+.tracker-frame:hover { transform: translateY(-3px); }
+.tracker-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+.tracker-frame::before {
+  content: '';
+  position: absolute;
+  top: 0.35rem; left: 0.35rem; right: 0.35rem;
+  height: 22px;
+  background: linear-gradient(180deg, rgba(52,58,63,0.85) 0%, transparent 100%);
+  border-radius: 4px 4px 0 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.tracker-caption {
+  font-family: var(--display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+/* CTA hiérarchie — 5 niveaux */
+.btn-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.2rem;
+  background: transparent;
+  color: var(--deep);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--deep);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-cta-outline:hover {
+  background: var(--deep);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(52,58,63,0.22);
+}
+.btn-cta-enhanced {
+  box-shadow:
+    0 4px 14px rgba(225,59,86,0.28),
+    0 14px 42px rgba(225,59,86,0.18);
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+.btn-cta-ultimate {
+  padding: 1.45rem 3.2rem;
+  font-size: 0.92rem;
+  transform: scale(1);
+  box-shadow:
+    0 6px 20px rgba(225,59,86,0.35),
+    0 18px 56px rgba(225,59,86,0.22);
+  animation: pulse-ultimate 2.6s ease-in-out infinite;
+}
+@keyframes pulse-subtle {
+  0%, 100% { box-shadow: 0 4px 14px rgba(225,59,86,0.28), 0 14px 42px rgba(225,59,86,0.18); }
+  50%      { box-shadow: 0 4px 14px rgba(225,59,86,0.38), 0 18px 56px rgba(225,59,86,0.28); }
+}
+@keyframes pulse-ultimate {
+  0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(225,59,86,0.35), 0 18px 56px rgba(225,59,86,0.22); }
+  50%      { transform: scale(1.025); box-shadow: 0 6px 20px rgba(225,59,86,0.45), 0 22px 68px rgba(225,59,86,0.32); }
+}
+
+/* Final CTA enhanced — cercles concentriques + fond deep */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--deep) 0%, #2B3135 60%, var(--deep) 100%);
+  padding: 5rem 3rem !important;
+  border-radius: 4px;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: -140px; right: -140px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(225,59,86,0.45) 0%,
+    rgba(225,59,86,0.45) 22%,
+    transparent 22.5%,
+    transparent 40%,
+    rgba(225,59,86,0.28) 40.5%,
+    rgba(225,59,86,0.28) 54%,
+    transparent 54.5%,
+    transparent 70%,
+    rgba(225,59,86,0.15) 70.5%,
+    rgba(225,59,86,0.15) 82%,
+    transparent 82.5%);
+  pointer-events: none;
+}
+.final-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(225,59,86,0.25);
+  box-shadow:
+    0 0 0 14px transparent,
+    0 0 0 15.5px rgba(225,59,86,0.18),
+    0 0 0 30px transparent,
+    0 0 0 31.5px rgba(225,59,86,0.1);
+  pointer-events: none;
+}
+.final-cta .final-cta-content { position: relative; z-index: 1; }
+.final-cta .final-cta-title,
+.final-cta .final-cta-desc { color: var(--bg) !important; }
+.final-cta .final-cta-title em { color: var(--red) !important; }
+.final-cta .risk-box {
+  background: rgba(246,242,236,0.06);
+  border-left-color: var(--red);
+  color: rgba(246,242,236,0.88);
+}
+.final-cta .risk-box strong { color: var(--bg); }
+.final-cta .risk-box em { color: var(--red); }
+.final-cta .btn-cta-sub { color: rgba(246,242,236,0.62); }
+
+/* Témoignages différenciés */
+.testimonial-photo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.1rem;
+}
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+  color: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(225,59,86,0.28);
+}
+.testimonial-meta {
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.testimonial-meta strong {
+  display: block;
+  color: var(--red);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+}
+.testimonial-anon-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  background: rgba(205,191,182,0.35);
+  color: var(--muted);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-bottom: 0.9rem;
+}
+
+/* Encadré 3 clients — cercles concentriques (override des carrés) */
+.three-clients-circle-tl,
+.three-clients-circle-br {
+  border-radius: 50% !important;
+  background: none !important;
+  transform: none !important;
+}
+.three-clients-circle-tl {
+  width: 180px !important;
+  height: 180px !important;
+  left: -80px !important;
+  top: -80px !important;
+  background: radial-gradient(circle at center,
+    rgba(225,59,86,0.32) 0%,
+    rgba(225,59,86,0.32) 35%,
+    transparent 35.5%,
+    transparent 58%,
+    rgba(225,59,86,0.18) 58.5%,
+    rgba(225,59,86,0.18) 76%,
+    transparent 76.5%) !important;
+  opacity: 1 !important;
+}
+.three-clients-circle-br {
+  width: 140px !important;
+  height: 140px !important;
+  right: -60px !important;
+  bottom: -60px !important;
+  border: 1.5px solid rgba(225,59,86,0.3) !important;
+  box-shadow:
+    0 0 0 10px transparent,
+    0 0 0 11.5px rgba(225,59,86,0.2),
+    0 0 0 22px transparent,
+    0 0 0 23.5px rgba(225,59,86,0.1) !important;
+  opacity: 1 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .moment-pivot { margin: 2.5rem -1rem; padding: 3rem 1.5rem; }
+  .moment-signature { padding: 2.2rem 1.6rem; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .tracker-showcase { grid-template-columns: 1fr; }
+  .bandeau { padding: 1.1rem 1.5rem; font-size: 0.92rem; }
+  .bandeau::before, .bandeau::after { width: 18px; margin: 0 0.6rem; }
+  .final-cta { padding: 3.2rem 1.6rem !important; }
+  .final-cta::before { width: 260px; height: 260px; top: -80px; right: -80px; }
+  .final-cta::after { width: 180px; height: 180px; }
+  .btn-cta-ultimate { padding: 1.2rem 2rem; font-size: 0.84rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Barre de progression -->
+<div id="prog"></div>
+
+<!-- Watermark flottant ELUMA -->
+<div class="bg-eluma">ELUMA</div>
+
+<!-- ============================================
+     HEADER. ACCROCHE
+     ============================================ -->
+<header class="header">
+  <div class="hd"></div>
+  <div class="hd-sm"></div>
+  <div class="hd-ghost">ELUMA</div>
+  <div class="logo">ELUMA<span class="logo-dot">.</span></div>
+  <p class="header-sub">La Forge . Accompagnement fondateur . Solopreneurs et micro-entrepreneurs</p>
+  <h1 class="header-title">
+    Tu es devenu entrepreneur pour toucher la liberté. Tu te retrouves pris au piège.
+    <em>Et si c'était toi, la solution...</em>
+  </h1>
+  <p class="header-lead">
+    Tu revois ton canal d'acquisition. Tu changes ta méthode de pub. Tu te demandes si tu dois te mettre à l'IA, à l'automatisation, à un nouveau tunnel. Tu touches à tout ce qui est opérationnel en pensant que le problème est là. Le problème n'est pas là. <strong>C'est ta façon de regarder ton business qui bloque.</strong>
+  </p>
+  <p class="header-punchline">
+    Je ne t'apporte pas une méthode de plus. Je te tends un miroir. Tu te regardes, sans le masque de l'entrepreneur, du papa, de l'ami. <strong>Et d'un coup, tu vois ce qui bloque depuis des mois.</strong>
+  </p>
+  <div class="header-cta">
+    <a href="#cta-final" class="btn-cta"><span>Je veux mon pré-audit offert</span><span class="arr">→</span></a>
+    <span class="btn-cta-sub">45 minutes en visio . Sans engagement . Créneaux limités</span>
+  </div>
+</header>
+
+<!-- Bandeau signature — ancrage émotionnel immédiat post-header -->
+<div class="bandeau">Et si c'était toi, la solution…</div>
+
+<div class="wrap">
+
+<!-- ============================================
+     SECTION 2. AMPLIFICATION (les douleurs)
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">01 . Le miroir</span>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="section-title-editorial rev">Tu plafonnes à 3, 5, 8k. <em>Et tu ne sais pas pourquoi.</em></h2>
+
+  <p class="section-intro rev">
+    Entrepreneur. Manager. Technicien. Tu es les trois. Mais dans les faits, tu portes surtout la troisième casquette. Tu agis. Tu calcules. Tu livres. Combien d'heures par mois tu passes vraiment à bâtir ta vision ? À automatiser ce qui te mange tes journées ? À processer ce que tu refais à la main pour la centième fois ? <strong>Du coup tu vends. Mais tu cours dans la roue du hamster, derrière l'argent et derrière le temps.</strong>
+  </p>
+
+  <div class="pain-grid">
+
+    <!-- 01 inchangée -->
+    <div class="pain-card rev" data-num="01">
+      <div class="pain-scene">La peur qui ne te quitte jamais.</div>
+      <p class="pain-text">Tu te réveilles la nuit et tu calcules. Combien de mois de trésorerie. Combien de clients à perdre avant de retourner chercher un CDI. Tu as construit quelque chose, et chaque jour tu as peur que ça s'effondre. Tu n'en parles à personne.</p>
+    </div>
+
+    <!-- 02 NOUVELLE Gerber -->
+    <div class="pain-card rev" data-num="02">
+      <div class="pain-scene">Tu es devenu l'employé de ta propre boîte.</div>
+      <p class="pain-text">Tu as quitté ton job pour être libre. Tu passes tes journées à livrer, à facturer, à répondre aux mails, à gérer la compta. Tu n'as plus une heure par semaine pour penser à où tu vas. Tu n'es plus l'entrepreneur de ta boîte. Tu en es le technicien. Et personne ne paie pour t'aider à voir plus loin.</p>
+    </div>
+
+    <!-- 03 ex-02 -->
+    <div class="pain-card rev" data-num="03">
+      <div class="pain-scene">Seul avec tes décisions.</div>
+      <p class="pain-text">Tu prends 100% des décisions. Pricing, offre, stratégie, clients difficiles. Et tu n'as personne. Personne à qui dire "est-ce que je fais une connerie ?" à 23h un mardi soir. Ton/ta conjoint(e) veut t'aider mais ne comprend pas ton monde. Tes amis te disent "t'inquiète, ça va marcher". Tu souris. Tu meurs à l'intérieur.</p>
+    </div>
+
+    <!-- 04 ex-03 -->
+    <div class="pain-card rev" data-num="04">
+      <div class="pain-scene">Tu te sens illégitime.</div>
+      <p class="pain-text">Tu factures. Les clients reviennent. Mais au fond, tu te demandes si tu mérites vraiment ce que tu gagnes. Si tu es vraiment "bon" ou juste chanceux. Tu vois des gens moins compétents réussir mieux. Et tu te dis que le problème c'est peut-être toi. Pas ta technique. Toi.</p>
+    </div>
+
+    <!-- 05 ex-04 -->
+    <div class="pain-card rev" data-num="05">
+      <div class="pain-scene">"Et toi, ça va ?"</div>
+      <p class="pain-text">Tu dis oui. Toujours. Parce que de l'extérieur, ça a l'air bien. Tu bosses pour toi, tu gères ton temps, tu es "libre". Personne ne voit que tu es épuisé. Que tu tournes en boucle. Que tu refais le même mois depuis un an. Et que l'énergie qui te portait au début, elle ne revient plus.</p>
+    </div>
+
+  </div>
+
+  <div class="data-bar rev">
+    <div class="data-stat">
+      <div class="data-num">1 sur 2</div>
+      <div class="data-label">entrepreneurs comme toi prennent des médicaments pour dormir.</div>
+    </div>
+    <div class="data-stat">
+      <div class="data-num">+ de 90%</div>
+      <div class="data-label">c'est l'explosion du burnout chez les indépendants en 6 ans.</div>
+    </div>
+    <div class="data-stat">
+      <div class="data-num">+ 70%</div>
+      <div class="data-label">d'augmentation du burnout, bien plus que chez les salariés.</div>
+    </div>
+    <small class="data-source">Source : Mutualités Libres, 2018-2024.</small>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 3. DIAGNOSTIC
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">02 . Le diagnostic</span>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="section-title-impact rev">Le problème n'est pas ta méthode. <em>C'est que personne ne regarde au bon endroit.</em></h2>
+
+  <div class="diagnostic-block rev">
+    <p class="diagnostic-rupture">Tu as déjà payé des formations. Suivi des coachs. Lu les livres. Testé les méthodes. Et à chaque fois, pendant quelques semaines, <em>ça marche un peu.</em> Puis ça retombe.</p>
+
+    <div class="diagnostic-body">
+      <p>Tu te dis que tu n'es pas assez discipliné. Que tu n'as pas trouvé LA bonne méthode. Que si tu avais plus de moyens, plus de data, plus d'outils, ce serait différent.</p>
+
+      <p>Tu te trompes. Pas sur la méthode. Sur le diagnostic.</p>
+    </div>
+  </div>
+
+  <div class="key rev">
+    <p>Au fond, tout se résume à une chose. Tu as quitté ton employeur pour devenir ton propre patron. Sauf qu'en route, tu es devenu autre chose : celui qui exécute, qui livre, qui court. <span class="key-highlight">Le technicien de ta propre boîte.</span> <em>Personne ne te paie pour prendre de la hauteur. Personne sauf toi. Et toi, tu n'en as plus le temps.</em></p>
+  </div>
+
+  <div class="diagnostic-block rev" style="margin-top:2rem;">
+    <p class="diagnostic-rupture">Tu ne vas pas sortir de cette roue avec une méthode de plus. <em>Pas avec un nouveau canal d'acquisition. Pas avec une énième automatisation. Pas avec un coach qui te répète ce que tu sais déjà.</em></p>
+
+    <div class="diagnostic-body">
+      <p>Un business qui dure s'aligne avec qui tu es vraiment. Avec ce que tu veux faire dans ce monde. Avec l'impact que tu veux laisser. <strong>Et la vraie question, personne ne te la pose jamais :</strong></p>
+    </div>
+  </div>
+
+  <!-- Moment typographique — pivot émotionnel -->
+  <div class="moment-pivot rev">
+    <p>Qu'est-ce que <em>TU</em> veux changer dans ce monde ? Dans <em>TON</em> monde ?</p>
+  </div>
+
+  <div class="diagnostic-block rev" style="margin-top:2rem;">
+    <div class="diagnostic-body">
+      <p>Tant que cette question reste sans réponse, ton business tourne sur de l'énergie extérieure. Il peut produire du chiffre. Il ne produira jamais d'alignement. Et le jour où l'énergie baisse, tout retombe.</p>
+    </div>
+  </div>
+
+  <div class="diagnostic-block rev" style="margin-top:2rem;">
+    <div class="diagnostic-body">
+      <p>Tu as déjà eu cette intuition qui te disait de ne pas signer ce contrat. Tout était bon sur le papier. Tu as signé quand même. Et tu l'as regretté. Ou cette idée qui te réveillait à 5h du matin, que tu n'as jamais exécutée, et que tu as vu quelqu'un d'autre lancer 6 mois plus tard.</p>
+
+      <p>Les neurosciences le confirment : <strong>95% de tes décisions sont prises par une partie de toi qui précède la raison.</strong> Plus de 300 études convergent sur ce point. Ce n'est pas ta stratégie consciente qui pilote ton business. C'est quelque chose de plus profond.</p>
+
+      <p>Mais la science s'arrête là. Elle explique le mécanisme, pas la source. L'économiste Charles Gave l'a montré dans <em>Un Libéral Nommé Jésus</em> : les principes de construction de valeur les plus solides ne viennent pas des business schools. Ils viennent de textes millénaires sur la nature humaine. Prendre des risques, investir ses talents au lieu de les enterrer, servir avant de prendre. Ces principes sont plus vieux que le capitalisme, et ils marchent toujours.</p>
+    </div>
+  </div>
+
+  <div class="key rev">
+    <p>Tu n'es pas qu'un assemblage de neurones. Tu es <em>corps, âme et esprit.</em> Et ce qu'un homme a de plus important, seul un autre homme peut le percevoir. Pas un algorithme. Pas une méthode. <span class="key-highlight">Un regard humain</span>, posé, exigeant et bienveillant.</p>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 4. MIROIR FONDATEUR
+     ============================================ -->
+<section class="section">
+  <div class="mirror-wrap rev">
+    <div class="mirror-content">
+      <span class="mirror-pill">Qui parle</span>
+      <h2 class="mirror-title">Si tu te reconnais dans ce que tu viens de lire... <em>moi aussi..</em></h2>
+
+      <div class="mirror-body">
+        <p>Je m'appelle Mehdi Benlahoucine. Je n'ai pas de diplôme. J'ai quitté les bancs de l'école pour aller chercher un salaire, du pognon. J'avais énormément de facilité à l'école, mais je n'ai jamais été passionné par ce qu'elle me racontait.</p>
+
+        <p>Comme le dit Idriss Aberkane, doublement PhD, <em>l'école m'a servi un énorme buffet avec tout et n'importe quoi, sauf que j'étais noté sur ma capacité à tout bouffer.</em> Alors qu'en fait je n'aimais que certains sujets. Ça m'a fait douter de moi alors que j'étais ultra doué.</p>
+
+        <p>Et puis le monde de l'entreprise est arrivé. Et là j'ai compris. <strong>Dans un business, ce ne sont pas tes connaissances et ta technique qui font que tu réussis.</strong> C'est ta capacité d'adaptation. Ta résilience face à l'échec. Ta clairvoyance dans l'humain. Et ta façon de pouvoir comprendre ce qui est bon pour toi ou pas.</p>
+
+        <p>Pendant 8 ans, j'ai été le bras droit opérationnel de 3 startups. Pas en tant que consultant extérieur qui vient donner des conseils et qui repart. En tant que personne qui entre dans le moteur, qui le démonte, qui comprend chaque pièce, et qui le reconstruit.</p>
+
+        <p><strong>La première, une fintech sur la blockchain.</strong> On m'a fait venir pour trouver des clients. En deux semaines, j'ai compris que le vrai problème n'avait rien à voir : personne ne comprenait ce que la boîte vendait. J'ai tout repris. La promesse. Les documents. Le discours face aux investisseurs. Je suis devenu le visage du projet. C'est là que j'ai appris : <em>le bon diagnostic vaut plus que le bon plan d'action.</em></p>
+
+        <p><strong>La deuxième, un fonds d'investissement.</strong> Directeur commercial de fait. Seul. Du premier contact au dernier problème. J'ai appris ce que ça veut dire de porter un business à bout de bras quand personne ne regarde.</p>
+
+        <p><strong>La troisième, la plus grosse. Une startup tech dans la distribution B2B.</strong> Là, j'ai tout porté. La levée de fonds : 4 millions d'euros. Les recrutements clés qui ont fait exploser la boîte. La direction commerciale terrain : 20 à 30 machines par mois à 7 500€ pièce. Les pitchs, les crises, les pivots. <strong>On a remporté le prix d'innovation au CES de Las Vegas 2024, et le prix de la meilleure startup à Biarritz face à 30 concurrents.</strong></p>
+
+        <!-- Photos retouchées CSS — preuve VISUELLE + TANGIBLE -->
+        <div class="photo-grid rev">
+          <div class="photo-frame">
+            <img src="photos/Moi devant public.jpg" alt="Pitch devant public" loading="lazy">
+            <div class="photo-caption">Pitch devant partenaires</div>
+          </div>
+          <div class="photo-frame">
+            <img src="photos/Shaka pitch.png" alt="Pitch scène" loading="lazy">
+            <div class="photo-caption">Scène Shaka Biarritz 2024</div>
+          </div>
+          <div class="photo-frame">
+            <img src="photos/COncours Shaka Biarritz.png" alt="Victoire Shaka Biarritz" loading="lazy">
+            <div class="photo-caption">Victoire · Concours startup</div>
+          </div>
+        </div>
+
+        <!-- Cartouches typographiques anonymes — TANGIBLE sans trahir clients -->
+        <div class="cartouches rev">
+          <div class="cartouche">
+            <span class="cartouche-date">2018 — 2021</span>
+            Fintech blockchain · Série A · Luxembourg
+          </div>
+          <div class="cartouche">
+            <span class="cartouche-date">2020 — 2022</span>
+            Fonds d'investissement privé · Dubaï
+          </div>
+          <div class="cartouche">
+            <span class="cartouche-date">2021 — 2025</span>
+            Scale-up tech B2B · 4M€ levés · Prix Biarritz 2024 · CES 2024
+          </div>
+        </div>
+
+        <!-- Logos crédibilité -->
+        <div class="creds-logos rev">
+          <div class="cred-pill">
+            <img src="photos/Logo Shaka/Shaka Noir.svg" alt="Shaka Biarritz" style="width:64px;height:auto;opacity:0.85;">
+            <span class="cred-pill-sub">Prix startup · Biarritz 2024</span>
+          </div>
+          <div class="cred-pill">
+            <span class="cred-pill-label">CES 2024</span>
+            <span class="cred-pill-sub">Prix d'innovation · Las Vegas</span>
+          </div>
+        </div>
+
+        <div class="mirror-facts">
+          <div>
+            <div class="fact-num">5M€+</div>
+            <div class="fact-label">levés en 8 ans pour 3 startups</div>
+          </div>
+          <div>
+            <div class="fact-num">CES 2024</div>
+            <div class="fact-label">Prix d'innovation, Las Vegas</div>
+          </div>
+          <div>
+            <div class="fact-num">0</div>
+            <div class="fact-label">diplôme. Que du vécu.</div>
+          </div>
+        </div>
+
+        <p>Et j'ai vu toujours la même chose. Des fondateurs brillants qui plafonnent. Pas parce que leur marché est mauvais. Pas parce que leur produit est faible. Parce qu'<strong>ils ne s'alignent plus avec ce qu'ils construisent.</strong> Parce qu'ils portent, seuls, des décisions qu'ils ne sont plus en paix de prendre. Parce que personne, autour d'eux, ne leur renvoie un regard juste.</p>
+
+        <p>J'ai vu ce que ça coûte. J'ai payé le prix aussi. Le premier projet a planté parce que les investisseurs ont voulu sortir trop tôt. <strong>Le plus gros actif d'un business, ce n'est pas ta base client. C'est toi.</strong> Et que si tu casses, tout casse.</p>
+
+        <p>Pendant toutes ces années, je l'ai fait pour d'autres. En contrepartie d'un salaire, d'une part, d'une rémunération indirecte. J'étais le consultant, le directeur, le bras droit.</p>
+
+        <p><strong>Aujourd'hui j'arrête de le faire pour les autres. Je le fais directement pour toi.</strong> Sans intermédiaire. Sans hiérarchie. Sans intérêt caché. Mon intérêt principal, c'est ta réussite. Nous sommes liés.</p>
+      </div>
+
+      <!-- Moment signature — punchline miroir fondateur -->
+      <div class="moment-signature rev">
+        <p>Je suis <strong>l'associé</strong> qui n'a pas de part.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA INTERMÉDIAIRE 1 — niveau outline (lecteur tiède post-miroir) -->
+<div class="wrap" style="text-align:center;margin:3rem auto;">
+  <a href="#cta-final" class="btn-cta-outline rev"><span>En savoir plus sur le pré-audit</span><span class="arr">→</span></a>
+  <span class="btn-cta-sub" style="color:var(--muted);display:block;margin-top:0.8rem;">Découverte · Sans engagement</span>
+</div>
+
+<!-- ============================================
+     SECTION 5. LA FORGE (l'offre)
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">03 . La Forge</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="forge-intro rev">
+    <p class="forge-not"><span class="strike">Formation en ligne.</span> <span class="strike">Coaching générique.</span> <span class="strike">Programme collectif.</span> <span style="color:var(--deep);font-weight:600;opacity:1;">Oublie tout ça.</span></p>
+    <p class="forge-is">La Forge, c'est <em>l'associé que tu n'as pas encore recruté.</em> Pendant 12 semaines. En visio, en one-to-one. À tes côtés. Dans ta réalité.</p>
+  </div>
+
+  <h3 class="section-title-impact rev" style="font-size: clamp(1.5rem, 2.6vw, 2.1rem);">Trois piliers. Une seule logique.</h3>
+
+  <div class="pillars-grid">
+    <div class="pillar rev">
+      <div class="pillar-num-ghost">01</div>
+      <span class="pillar-tag">Pilier 01</span>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" fill="none" stroke="#F6F2EC" stroke-width="1.5"/></svg>
+      </div>
+      <h4 class="pillar-title">Le regard sur le fondateur</h4>
+      <p class="pillar-text">On commence par <strong>TOI</strong>. Pas par ton business. En 2 sessions, tu sauras ce qui te bloque vraiment, pourquoi tu prends certaines décisions contre ton intérêt, et ce que tu évites sans t'en rendre compte. Tu repartiras avec une carte claire de tes schémas. Pas du développement personnel flou. <strong>Une lecture chirurgicale de qui tu es quand tu décides.</strong></p>
+    </div>
+    <div class="pillar rev">
+      <div class="pillar-num-ghost">02</div>
+      <span class="pillar-tag">Pilier 02</span>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12 L9 6 L15 12 L21 6" fill="none" stroke="#F6F2EC" stroke-width="2.2" stroke-linecap="round"/><circle cx="21" cy="6" r="2"/></svg>
+      </div>
+      <h4 class="pillar-title">La vision stratégique</h4>
+      <p class="pillar-text">Une fois que tu te vois clairement, on passe à ton business. Tu sauras exactement sur quoi appuyer demain matin. Quels clients garder, lesquels lâcher. Quel canal doubler, lequel couper. <strong>Un plan d'action cousu sur ta personnalité, ton marché et ton énergie.</strong> Pas de recette générique. Des décisions que tu peux exécuter dès la fin de la session.</p>
+    </div>
+    <div class="pillar rev">
+      <div class="pillar-num-ghost">03</div>
+      <span class="pillar-tag">Pilier 03</span>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="16" height="12" rx="1" fill="none" stroke="#F6F2EC" stroke-width="1.8"/><path d="M8 10 L10 12 L8 14" fill="none" stroke="#F6F2EC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 14 L16 14" stroke="#F6F2EC" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h4 class="pillar-title">L'IA comme accélérateur</h4>
+      <p class="pillar-text">Pas l'IA comme gadget. <strong>L'IA comme bras droit silencieux</strong> qui tourne 24/7 pour toi. Automatisations concrètes, outils sur mesure. ELUMA est elle-même construite avec l'IA. Tu ne me paies pas pour des théories, tu me paies pour des systèmes qui tournent.</p>
+    </div>
+  </div>
+
+  <div class="timing-bar rev">
+    <h4>Rythme de travail</h4>
+    <div class="timing-flow">
+      <div class="timing-block">
+        <span class="timing-num">Sprint</span>
+        <span class="timing-sub">6 semaines intensives</span>
+      </div>
+      <span class="timing-arrow">→</span>
+      <div class="timing-block">
+        <span class="timing-num">Ancrage</span>
+        <span class="timing-sub">6 semaines de consolidation</span>
+      </div>
+      <span class="timing-arrow">→</span>
+      <div class="timing-block">
+        <span class="timing-num">Autonomie</span>
+        <span class="timing-sub">Les outils restent. Le cadre aussi.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagnostic-block rev" style="margin-top:2rem;border-left-width:4px;">
+    <p class="diagnostic-rupture">En pratique, ça ressemble à quoi ?</p>
+    <div class="diagnostic-body">
+      <p><strong>1 session par semaine en visio one-to-one</strong> (pas un groupe, pas un replay). Chaque session couvre 4 couches : toi en tant que fondateur, ta stratégie, l'IA appliquée à ton business, et les actions terrain de la semaine.</p>
+      <p>Entre les sessions : accès direct à moi. Questions, doutes, décisions urgentes. Tu n'es plus seul(e) avec tes choix.</p>
+    </div>
+  </div>
+
+  <!-- ENCADRÉ 3 CLIENTS MAX -->
+  <div class="rev" style="background:var(--deep);color:var(--bg);padding:2.8rem 3.2rem;border-radius:2px;margin:2.8rem 0;position:relative;overflow:hidden;box-shadow:0 14px 44px rgba(52,58,63,0.2);text-align:center;">
+    <div class="three-clients-circle-tl" style="position:absolute;"></div>
+    <div class="three-clients-circle-br" style="position:absolute;"></div>
+    <div style="position:relative;z-index:1;">
+      <p style="font-family:var(--display);font-weight:700;font-size:clamp(2.8rem,5vw,4rem);color:var(--red);line-height:1;margin-bottom:0.6rem;letter-spacing:-0.03em;">3 clients.</p>
+      <p style="font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.6rem);color:var(--bg);line-height:1.3;margin-bottom:1.5rem;letter-spacing:-0.02em;">Maximum. En même temps. Point.</p>
+      <p style="font-family:var(--sans);font-size:0.98rem;color:rgba(246,242,236,0.85);line-height:1.75;max-width:640px;margin:0 auto;">Je pourrais en prendre plus. Je ne veux pas. Parce que ce que je fais demande de la profondeur, pas du volume. Je veux connaître ton business sur le bout des doigts. Je veux que chaque session soit un vrai moment, pas un créneau dans un planning surchargé. 3 clients, c'est ce qu'il me faut pour délivrer du travail qui change vraiment les choses. Le reste de mon temps, je construis ce qui fera grandir ELUMA demain. <strong>Les humains me nourrissent. La qualité me protège.</strong></p>
+    </div>
+  </div>
+
+  <!-- Screenshots ELUMA Tracker — preuve TANGIBLE IA -->
+  <div class="tracker-showcase rev">
+    <div>
+      <div class="tracker-frame">
+        <img src="photos/Timetracker 1.png" alt="ELUMA Tracker — gestion des tâches" loading="lazy">
+      </div>
+      <p class="tracker-caption">ELUMA Tracker · Gestion temps réel</p>
+    </div>
+    <div>
+      <div class="tracker-frame">
+        <img src="photos/Timetracker 2.png" alt="ELUMA Tracker — analytics" loading="lazy">
+      </div>
+      <p class="tracker-caption">Analytics fondateur · Construit avec l'IA</p>
+    </div>
+  </div>
+
+  <div class="ia-block rev">
+    <span class="ia-tag">L'IA en chiffres concrets</span>
+    <h3 class="ia-title">Ton temps est ton premier actif. Récupère-le.</h3>
+    <div class="ia-calc">
+      <span class="ia-calc-num">4h / semaine</span>
+      <span class="ia-calc-op">×</span>
+      <span class="ia-calc-num">100€ / h</span>
+      <span class="ia-calc-op">=</span>
+      <span class="ia-calc-num">1 600€ / mois récupérés.</span>
+    </div>
+    <p class="ia-text">C'est l'équivalent minimum que tu récupères en automatisant ce qui peut l'être. Pour un solopreneur, c'est ta charge marketing. Pour un entrepreneur, c'est un collaborateur. Et tu le récupères à vie. Les automatisations tournent sans que je sois là.</p>
+  </div>
+
+  <h3 class="section-title-impact rev" style="font-size:clamp(1.4rem,2.4vw,1.9rem);margin-top:3rem;">Ce que tu ne trouveras pas ailleurs.</h3>
+
+  <div class="contrast-block">
+    <div class="contrast-col contrast-before rev">
+      <span class="contrast-label">Ce que tu as déjà essayé</span>
+      <ul>
+        <li>Des formations en ligne que tu n'as jamais finies</li>
+        <li>Des coachs qui récitent des scripts génériques</li>
+        <li>Des podcasts qui t'impressionnent sans te changer</li>
+        <li>Des promesses de "x10 ton CA en 90 jours"</li>
+        <li>Des communautés qui te regardent stagner en silence</li>
+        <li>Des outils techniques sans cadre stratégique</li>
+      </ul>
+    </div>
+    <div class="contrast-col contrast-after rev">
+      <span class="contrast-label">Ce que tu trouves dans La Forge</span>
+      <ul>
+        <li>Un accompagnement 1 à 1 hebdomadaire, pas un groupe</li>
+        <li>Un travail sur TOI avant ton business</li>
+        <li>Aucune fausse promesse. Juste la vérité sur ta situation.</li>
+        <li>Des outils IA sur mesure qui tournent pour toi</li>
+        <li>Un associé temporaire qui te challenge vraiment</li>
+        <li>Un cadre qui reste après la fin du sprint</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 6. PREUVES
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">04 . Les preuves</span>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="section-title-editorial rev">Les cartes sur la table. <em>Tout ce que tu peux vérifier.</em></h2>
+
+  <div class="proof-credo rev">
+    <h3 class="proof-credo-title">Je ne te vends pas du rêve. <em>Je te vends une vérité vérifiable.</em></h3>
+    <div class="proof-credo-body">
+      <p>Je n'ai pas 100 témoignages clients coaching. Je démarre cette offre maintenant. Alors voici ce que j'ai à la place, et ce que tu peux vérifier par toi-même :</p>
+      <p><strong>Un parcours réel.</strong> Pas de titre ronflant, mais 8 ans sur le terrain, 3 sociétés structurées, plus de 5 millions d'euros levés. Sans diplôme. Par la vision et le travail.</p>
+      <p><strong>Un engagement total.</strong> Cette fois j'arrête de le faire pour les autres contre un salaire ou une récompense indirecte. Je le fais directement pour toi. <em>Mon intérêt principal, c'est ta réussite. Nous sommes liés.</em></p>
+      <p><strong>Une démonstration offerte.</strong> 45 min de pré-audit où tu repars avec une analyse concrète, offerte, sans engagement. Je te prouve qui je suis en face à face. Si tu n'es pas convaincu après ça, tu n'as rien perdu sauf 45 min de ton temps.</p>
+    </div>
+  </div>
+
+  <div class="pillars-proof">
+    <div class="pillar-proof rev">
+      <span class="pillar-proof-tag">Parcours</span>
+      <h4 class="pillar-proof-title">8 ans sur le terrain</h4>
+      <p class="pillar-proof-text">3 sociétés dont j'ai été l'élément clé. 5M€+ levés. Des projets documentés publiquement.</p>
+    </div>
+    <div class="pillar-proof rev">
+      <span class="pillar-proof-tag">Formation</span>
+      <h4 class="pillar-proof-title">Neurosciences appliquées</h4>
+      <p class="pillar-proof-text">2 ans de collaboration avec un cabinet spécialisé en neurosciences de la persuasion. Base : 300+ études scientifiques.</p>
+    </div>
+    <div class="pillar-proof rev">
+      <span class="pillar-proof-tag">Méthode</span>
+      <h4 class="pillar-proof-title">Corps, âme, esprit</h4>
+      <p class="pillar-proof-text">Un cadre ancré dans la science, enrichi d'une lecture humaine et spirituelle. La science seule ne voit que le corps.</p>
+    </div>
+    <div class="pillar-proof rev">
+      <span class="pillar-proof-tag">Démonstration</span>
+      <h4 class="pillar-proof-title">45 min offertes</h4>
+      <p class="pillar-proof-text">Tu repars avec une analyse écrite de ta situation. Mon investissement en temps. Tu décides après.</p>
+    </div>
+  </div>
+
+  <!-- TÉMOIGNAGES RÉELS -->
+  <div style="margin:3rem 0;">
+    <h3 class="rev" style="font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,2.2vw,1.6rem);color:var(--deep);margin-bottom:1.8rem;letter-spacing:-0.015em;">Ce que disent ceux qui ont travaillé avec moi.</h3>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+
+      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
+        <div class="testimonial-photo">
+          <div class="testimonial-avatar">D</div>
+          <div class="testimonial-meta">
+            <strong>Danny</strong>
+            Entrepreneur · 10 ans de collaboration
+          </div>
+        </div>
+        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;">"Si un entrepreneur me demandait un avis sur toi, je lui dirais directement de foncer. Mehdi te dira clairement ce qui ne va pas. Il va identifier tes points faibles et t'aider à les transformer en force, sans jugement, toujours de manière constructive. Tu auras plus qu'un entrepreneur : tu auras un partenaire. Et ça, je peux le garantir à 110%."</p>
+      </div>
+
+      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
+        <span class="testimonial-anon-badge">Témoignage anonymisé</span>
+        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;margin-bottom:1.2rem;">"Ce qui est frappant, c'est la confiance que Mehdi dégage, car ses propos sont justes et sa ligne de conduite reste la même. Son implication à 100%, son discours clair sans concession, l'analyse professionnelle du projet qu'il connaît sur le bout des doigts. Fonce, tu ne le regretteras pas."</p>
+        <p style="font-family:var(--display);font-weight:700;font-size:0.82rem;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;">F. — Fondateur Fintech</p>
+      </div>
+
+      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
+        <span class="testimonial-anon-badge">Témoignage anonymisé</span>
+        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;margin-bottom:1.2rem;">"Tu as la maturité et l'expérience pour aider un partenaire à travailler sur des points clés que tu maîtrises : l'introspection, le plan d'action, la mise en marche, le résultat. Il peut se laisser aller en toute confiance entre tes mains."</p>
+        <p style="font-family:var(--display);font-weight:700;font-size:0.82rem;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;">M. — Entrepreneur</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA INTERMÉDIAIRE 2 — niveau enhanced (lecteur chaud post-preuves) -->
+  <div style="text-align:center;margin:3rem 0;">
+    <a href="#cta-final" class="btn-cta btn-cta-enhanced rev"><span>Je prends mes 45 minutes</span><span class="arr">→</span></a>
+    <span class="btn-cta-sub" style="color:var(--muted);display:block;margin-top:0.8rem;">3 clients max en simultané · Créneaux limités</span>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 7. POUR TOI / PAS POUR TOI
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">05 . Qualifier</span>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="section-title-impact rev">Soyons clairs tout de suite.</h2>
+  <p class="section-intro rev">Je ne cherche pas à plaire à tout le monde. Je cherche à travailler avec des gens qui me correspondent. Lis attentivement. C'est ici que tu décides de la suite.</p>
+
+  <div class="fit-grid">
+    <div class="fit-col fit-yes rev">
+      <span class="fit-header">Pour toi si...</span>
+      <h3 class="fit-title">Tu te reconnais profondément dans ces lignes</h3>
+      <ul>
+        <li>Tu ne sais plus où tu en es. Tu te sens perdu(e).</li>
+        <li>Tu as déjà consulté des dizaines de vidéos et de coachs, offerts ou payants, et tu commences à penser que c'est du bullshit.</li>
+        <li>Tu sens que tu as du potentiel inexploité, mais tu ne sais plus comment y accéder.</li>
+        <li>Tu te sens un peu incompris(e). Ou tu penses différemment de la plupart des gens autour de toi.</li>
+        <li>Tu es prêt(e) à te remettre en question, au point d'être potentiellement déstabilisé(e) par ce que je vais te dire.</li>
+        <li>Tu veux un sparring partner, pas un cheerleader.</li>
+        <li>Tu veux un vrai plan, structuré, pensé pour toi. Pas une recette.</li>
+      </ul>
+    </div>
+    <div class="fit-col fit-no rev">
+      <span class="fit-header">Pas pour toi si...</span>
+      <h3 class="fit-title">Tu cherches autre chose</h3>
+      <ul>
+        <li>Tu crois que le problème c'est uniquement ta technique ou ton marketing.</li>
+        <li>Tu penses que ceux qui ont plus de moyens, plus de vues, plus de data sont forcément avantagés.</li>
+        <li>Tu crois qu'une méthode technique va te rendre riche.</li>
+        <li>Tu crois que quelques conseils bien placés vont te changer en profondeur.</li>
+        <li>Tu veux "tester" sans vraiment t'engager.</li>
+        <li>Tu veux doubler ton CA en 30 jours sans regarder ce qui coince.</li>
+        <li>Tu n'es pas prêt(e) à accepter que le travail commence par toi.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 8. ENCART CONJOINT (après qualification)
+     ============================================ -->
+<section class="section">
+  <div class="spouse-card rev">
+    <span class="spouse-tag">Un mot pour les deux</span>
+    <h3 class="spouse-title">Tu ne prends pas cette décision seul(e). Et c'est normal.</h3>
+    <div class="spouse-body">
+      <p>Si tu es en couple, la personne qui partage ta vie vit ton business avec toi, même sans le comprendre. Elle vit les dimanches soirs. Les mois galères. Les décisions que tu portes seul(e) à 2h du matin.</p>
+      <p>Ton/ta conjoint(e) peut parfois être un obstacle sans le vouloir. Parce qu'il/elle ne comprend pas ce que tu construis. Parce que vous décidez ensemble de vos investissements. Ou simplement parce qu'il/elle te challenge sur tes prochains pas.</p>
+      <p><strong>Dans certains cas, la seule façon d'avancer, c'est qu'on soit trois dans le même bureau.</strong> Si le pré-audit révèle que l'enjeu se joue aussi à la maison, je te propose que ton/ta conjoint(e) participe au rendez-vous. On fait le point ensemble. Alignés.</p>
+
+      <div class="spouse-options">
+        <div class="spouse-option" onclick="toggleSpouse(this)">
+          <div class="spouse-option-check"></div>
+          <div class="spouse-option-label">
+            <strong>Oui, j'inclurai mon/ma conjoint(e).</strong>
+            On avance ensemble. C'est le bon moment pour qu'il/elle soit au courant et qu'on s'aligne.
+          </div>
+        </div>
+        <div class="spouse-option" onclick="toggleSpouse(this)">
+          <div class="spouse-option-check"></div>
+          <div class="spouse-option-label">
+            <strong>Non, ça reste entre nous pour l'instant.</strong>
+            <em>Je gère de mon côté. Il/elle n'a pas besoin de savoir tout de suite.</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 9. CTA FINAL
+     ============================================ -->
+<section id="cta-final" class="final-cta rev">
+  <div class="final-cta-content">
+    <h2 class="final-cta-title">45 minutes pour voir <em>qui tu es vraiment.</em></h2>
+    <p class="final-cta-desc">
+      Le pré-audit n'est pas un "appel de découverte" déguisé. C'est un vrai audit. Tu repars avec une analyse écrite de ta situation, quel que soit le résultat. Même si on ne travaille pas ensemble ensuite, tu auras reçu quelque chose.
+    </p>
+
+    <div class="risk-box">
+      <p><strong>Soyons clairs sur ce que tu reçois.</strong> Je suis un entrepreneur qui mène sa vie. Je te dédie 2 à 3 heures de mon temps. Préparation, pré-audit de 45 minutes en visio, restitution écrite. Pendant ce temps-là, <strong>je joue le rôle de ton associé sans en être un.</strong> Je n'ai aucun intérêt à te faire plaisir. Je ne sais même pas encore si je veux travailler avec toi. Mon seul objectif : <em>te dire la vérité platement et avec bienveillance</em>, et comprendre qui tu es vraiment au fond. C'est mon investissement. Tu ne t'engages à rien.</p>
+    </div>
+
+    <p class="final-cta-desc">
+      Je n'accompagne que <strong>3 clients en simultané.</strong> Chaque pré-audit est un vrai audit, pas un script. Les créneaux sont limités volontairement.
+    </p>
+
+    <a href="#" onclick="event.preventDefault(); alert('Formulaire de qualification à connecter');" class="btn-cta btn-cta-ultimate"><span>Je veux savoir ce qui me bloque vraiment</span><span class="arr">→</span></a>
+    <span class="btn-cta-sub">Formulaire de qualification en 2 minutes . Réponse sous 48h . Sans engagement</span>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 10. FAQ
+     ============================================ -->
+<section class="section">
+  <div class="section-label-wrap rev">
+    <div class="section-line"></div>
+    <span class="section-label">06 . Questions</span>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="section-title-editorial rev">Les questions que tu te poses encore.</h2>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>Pourquoi toi et pas un autre ?</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Parce que la plupart des accompagnants n'ont jamais été à ta place. Ils ont lu les bons livres. Ils récitent les bonnes méthodes. Ils n'ont pas construit. Pas levé. Pas planté. Pas remonté.</p>
+      <p>Moi, j'ai vécu ce que tu vis. J'ai été l'élément clé de 3 sociétés, j'ai levé plus de 5M€, sans diplôme. J'ai aussi vu des projets casser. Pas pour des raisons techniques. Pour des raisons humaines. Chez les fondateurs. Chez moi.</p>
+      <p>Je ne suis pas un coach. <strong>Je suis un entrepreneur qui accompagne d'autres entrepreneurs.</strong> C'est la seule différence qui compte.</p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>C'est quoi la différence avec un coach classique ?</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Un coach classique te donne des méthodes. Des outils. Des cadres. Il te pousse à faire ce que TOI tu décides.</p>
+      <p>Moi, je commence par te regarder en face pour comprendre qui tu es, ce qui te bloque, ce qui te ressemble vraiment. Ensuite seulement on construit le business, <strong>en cohérence avec toi</strong>, pas contre toi. Et j'apporte l'IA pour que ce qu'on construit tourne sans toi.</p>
+      <p>Je suis <em>l'associé temporaire qui n'a pas de part.</em> Pas le coach qui part avec ta carte bleue.</p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>Pourquoi tu ne donnes pas tes prix sur la page ?</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Parce que chaque situation est différente. Si tu vas chez un mécanicien pour un problème dont tu ne connais pas la cause, et qu'il te dit <em>"ce sera 75€"</em> avant même de regarder le moteur, tu ne te dirais pas que c'est un arnaqueur ?</p>
+      <p>Je fonctionne pareil. On commence par regarder ensemble où tu en es. Le pré-audit de 45 min me permet de comprendre ta situation. À la fin, je te dis si on peut travailler ensemble, comment, et combien ça coûte. <strong>Le prix dépend de ce qu'il faut construire.</strong> Et ça, je ne peux pas le deviner avant de t'avoir écouté.</p>
+      <p>Ce que je peux te dire : c'est un accompagnement complet, en one-to-one, sur 12 semaines. Je ne fais pas du low-ticket et je n'ai pas 50 clients. <strong>J'en accompagne 3 à la fois.</strong> C'est un investissement, et il doit être à la hauteur de ce que tu veux construire.</p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>Pourquoi te faire confiance ?</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Tu n'as pas à me faire confiance tout de suite. Tu as à me faire confiance <strong>pendant 45 minutes.</strong> C'est tout.</p>
+      <p>Sur cette page, tu as :</p>
+      <p>. Un parcours réel, vérifiable, documenté (5M€+ levés, 3 sociétés, 8 ans de terrain).<br>
+      . Une méthode ancrée dans les neurosciences et 300+ études scientifiques.<br>
+      . Une offre qui te donne une démo offerte avant tout engagement.<br>
+      . Un positionnement qui refuse volontairement ceux qui cherchent du magique.</p>
+      <p>Si après le pré-audit tu n'es pas convaincu(e), tu ne reviens pas. Tu auras quand même ton analyse écrite en poche. <em>C'est tout ce que tu risques.</em></p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>Je n'ai pas forcément le budget pour un accompagnement premium</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>C'est une vraie question. Parlons-en au pré-audit, pas maintenant.</p>
+      <p>Si ta situation le justifie, il existe plusieurs formats d'accompagnement adaptés à différentes tailles de business. Et si vraiment ce n'est pas le bon moment, je te dirai honnêtement où mettre ton énergie d'abord, avant de revenir me voir.</p>
+      <p><strong>Mon objectif n'est pas de te vendre à tout prix.</strong> Mon objectif est que tu avances. Parfois ça veut dire bosser ensemble. Parfois ça veut dire te dire : <em>"reviens dans 6 mois."</em></p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>Ma situation est trop complexe, tu ne pourras pas comprendre</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Tu ne seras pas le premier à me dire ça. Et tu ne seras pas le premier à être surpris en 45 minutes.</p>
+      <p>Je ne dis pas ça par arrogance. Je dis ça parce que la plupart du temps, quand une situation paraît "impossible à expliquer", c'est qu'elle n'a jamais vraiment été décortiquée par quelqu'un qui sait où regarder. Les neurosciences combinées à une lecture humaine profonde permettent de lire des schémas que tu n'as peut-être même pas vus toi-même.</p>
+      <p>Essaie. 45 minutes. Si je ne comprends rien, tu n'auras rien perdu.</p>
+    </div>
+  </div>
+
+  <div class="faq-item rev">
+    <button class="faq-q">
+      <span>C'est quoi le piège du pré-audit offert ?</span>
+      <span class="faq-plus">+</span>
+    </button>
+    <div class="faq-a">
+      <p>Il n'y en a pas. Mais je comprends la question. On a tous vu trop de "calls découverte" déguisés en pitchs de 45 min.</p>
+      <p>Voici la vérité : je consacre 2 à 3 heures de mon temps par pré-audit (préparation, appel, restitution écrite). Je ne le fais que pour des profils que j'ai qualifiés au préalable via le formulaire. <strong>Si tu passes le filtre, c'est que je pense sincèrement pouvoir t'aider, ou au minimum te donner une vraie lecture de ta situation.</strong></p>
+      <p>Pas de pression à la fin. Pas de "remise exceptionnelle si tu signes maintenant". Je te dis ce que je vois, je te laisse avec ton mini-rapport, et je te laisse décider.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA INTERMÉDIAIRE 3 — niveau enhanced (post-FAQ, doutes levés) -->
+<div style="text-align:center;margin:3.5rem 0 2rem;">
+  <a href="#cta-final" class="btn-cta btn-cta-enhanced rev"><span>Je veux savoir qui je suis vraiment</span><span class="arr">→</span></a>
+  <span class="btn-cta-sub" style="color:var(--muted);display:block;margin-top:0.8rem;">45 min de vérité · En visio · Analyse écrite offerte</span>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="footer-logo">ELUMA<span>.</span></div>
+  <p>ELUMA SRL . Belgique . La Forge . L'associé que tu n'as pas encore recruté.</p>
+  <p class="footer-tag">"Et si c'était toi la solution..."</p>
+</footer>
+
+<!-- ============================================
+     EXIT INTENT MODAL
+     ============================================ -->
+<div class="exit-modal" id="exitModal">
+  <div class="exit-modal-box">
+    <button class="exit-close" onclick="closeExit()" aria-label="Fermer">×</button>
+    <h3 class="exit-title">Pas encore prêt(e) pour l'appel ? <em>Pose-moi une question.</em></h3>
+    <p class="exit-desc">Laisse-moi ton email et une question sur ta situation. Je te réponds personnellement sous 48h. Pas un robot. Pas un template. Moi, Mehdi. Un vrai échange, pour que tu saches si ça vaut le coup d'aller plus loin.</p>
+    <form class="exit-form" onsubmit="handleExitSubmit(event)">
+      <input type="email" class="exit-input" placeholder="Ton adresse email" required>
+      <textarea class="exit-input" placeholder="Ta question ou ta situation en quelques mots..." rows="3" style="resize:vertical;font-family:var(--sans);"></textarea>
+      <button type="submit" class="exit-submit">Envoyer ma question →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/* Barre de progression scroll */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const percent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  prog.style.width = percent + '%';
+}, { passive: true });
+
+/* Scroll-reveal */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+/* Counter animation — stimulus TANGIBLE (chiffres qui grimpent) */
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateCounter(el) {
+  const raw = el.textContent.trim();
+  const match = raw.match(/^([^\d-]*)([\d.,\s]+)(.*)$/);
+  if (!match) return;
+  const prefix = match[1] || '';
+  const numStr = match[2].replace(/\s/g, '').replace(',', '.');
+  const suffix = match[3] || '';
+  const target = parseFloat(numStr);
+  if (isNaN(target)) return;
+  if (prefersReduced) { el.textContent = raw; return; }
+  const duration = 1400;
+  const hasDecimal = numStr.includes('.');
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const current = target * eased;
+    const display = hasDecimal ? current.toFixed(1) : Math.round(current).toString();
+    el.textContent = prefix + display + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = raw;
+  }
+  requestAnimationFrame(tick);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.data-num, .fact-num').forEach(el => {
+  if (/\d/.test(el.textContent)) counterObs.observe(el);
+});
+
+/* FAQ toggle */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* Spouse options toggle */
+function toggleSpouse(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.spouse-option').forEach(opt => opt.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+/* Exit intent */
+let exitShown = false;
+const exitModal = document.getElementById('exitModal');
+
+document.addEventListener('mouseleave', e => {
+  if (exitShown) return;
+  if (e.clientY <= 0 && window.scrollY > 300) showExit();
+});
+
+if (window.matchMedia('(max-width: 768px)').matches) {
+  setTimeout(() => {
+    const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    if (!exitShown && scrollPct > 0.4) showExit();
+  }, 60000);
+}
+
+function showExit() {
+  if (exitShown) return;
+  exitShown = true;
+  exitModal.classList.add('active');
+}
+function closeExit() { exitModal.classList.remove('active'); }
+exitModal.addEventListener('click', e => { if (e.target === exitModal) closeExit(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeExit(); });
+
+function handleExitSubmit(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('.exit-input').value;
+  alert('Merci ! Ton email (' + email + ') est bien enregistré. À très vite.');
+  closeExit();
+}
+</script>
+
+</body>
+</html>
