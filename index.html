@@ -777,6 +777,256 @@ body {
 }
 .pillar-text strong { color: var(--deep); font-weight: 600; }
 
+/* === BLOC 4 — Disposition triangle décalé avec ponts === */
+
+.forge-intro-wrapper {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin: 3rem auto;
+  max-width: 1100px;
+}
+.forge-intro-text { }
+.forge-intro-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--bg2, #E6DED6);
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 12px 36px rgba(52,58,63,0.14);
+}
+.forge-intro-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.forge-intro-photo::before {
+  content: 'MB';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(52,58,63,0.2);
+  letter-spacing: -0.02em;
+  z-index: 0;
+}
+
+.forge-bridge {
+  text-align: center;
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--deep);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 2.4rem auto 0.4rem;
+  max-width: 780px;
+  line-height: 1.5;
+}
+.forge-bridge em {
+  color: var(--red);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.pillars-triangle {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "p1   bh   p2"
+    ".    bv   . "
+    "p3   p3   p3";
+  gap: 1.6rem;
+  margin: 2.8rem 0;
+  align-items: stretch;
+}
+.pillars-triangle .pillar[data-pos="p1"] { grid-area: p1; }
+.pillars-triangle .pillar[data-pos="p2"] { grid-area: p2; }
+.pillars-triangle .pillar[data-pos="p3"] { grid-area: p3; }
+.pillars-triangle .pillar-bridge-h { grid-area: bh; }
+.pillars-triangle .pillar-bridge-v { grid-area: bv; }
+
+.pillar-wide {
+  padding: 3rem 3.2rem 3rem;
+}
+.pillar-subtitle {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--red);
+  font-style: italic;
+  font-weight: 500;
+  margin-top: -0.4rem;
+  margin-bottom: 1.6rem;
+  letter-spacing: 0.01em;
+}
+.pillar-text-closer {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(52,58,63,0.12);
+}
+
+/* Trame radar pour Pilier 01 */
+.pillar-radar::after {
+  content: '';
+  position: absolute;
+  right: -40px; bottom: -40px;
+  width: 220px; height: 220px;
+  background-image:
+    radial-gradient(circle, transparent 0, transparent 28px, rgba(196,40,44,0.05) 29px, rgba(196,40,44,0.05) 30px, transparent 31px),
+    radial-gradient(circle, transparent 0, transparent 58px, rgba(196,40,44,0.04) 59px, rgba(196,40,44,0.04) 60px, transparent 61px),
+    radial-gradient(circle, transparent 0, transparent 88px, rgba(196,40,44,0.03) 89px, rgba(196,40,44,0.03) 90px, transparent 91px);
+  pointer-events: none;
+  z-index: 0;
+}
+.pillar-radar > * { position: relative; z-index: 1; }
+
+/* Ponts */
+.pillar-bridge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.9s ease 0.3s;
+}
+.pillar-bridge.in { opacity: 1; }
+.pillar-bridge-h {
+  min-width: 60px;
+  flex-direction: row;
+}
+.pillar-bridge-v {
+  min-height: 50px;
+  flex-direction: column;
+  padding: 0.8rem 0;
+}
+.bridge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0.6;
+}
+.bridge-dot:nth-child(2) { opacity: 0.8; }
+.bridge-dot:nth-child(3) { opacity: 1; }
+.bridge-arrow {
+  font-size: 0.8rem;
+  color: var(--red);
+  margin-top: 0.2rem;
+  opacity: 0.7;
+}
+
+/* === ENCART GERBER === */
+.gerber-box {
+  background: var(--bg2, #E6DED6);
+  border-left: 3px solid var(--red);
+  padding: 2rem 2.2rem;
+  margin: 0 0 2.4rem;
+  border-radius: 2px;
+}
+.gerber-intro {
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--deep);
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+}
+.gerber-roles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin: 1.4rem 0;
+  padding: 1.4rem 0;
+  border-top: 1px solid rgba(52,58,63,0.1);
+  border-bottom: 1px solid rgba(52,58,63,0.1);
+}
+.gerber-role { }
+.gerber-role-name {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gerber-role-time {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--red);
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+.gerber-role-desc {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.55;
+  opacity: 0.9;
+  margin: 0;
+}
+.gerber-pivot p {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  color: var(--deep);
+  line-height: 1.7;
+  margin: 0.6rem 0;
+}
+.gerber-pivot-end {
+  font-family: var(--display) !important;
+  font-size: 1.15rem !important;
+  color: var(--red) !important;
+  margin-top: 1.2rem !important;
+}
+
+/* === RESPONSIVE MOBILE === */
+@media (max-width: 780px) {
+  .forge-intro-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .forge-intro-photo {
+    order: -1;
+    max-width: 320px;
+    justify-self: center;
+  }
+  .pillars-triangle {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "p1"
+      "bv"
+      "p2"
+      "bv"
+      "p3";
+    gap: 1.2rem;
+  }
+  .pillars-triangle .pillar-bridge-h {
+    display: none;
+  }
+  .pillars-triangle .pillar-bridge-v {
+    min-height: 30px;
+    grid-area: auto;
+  }
+  .pillar-wide { padding: 2rem 1.8rem; }
+  .gerber-box { padding: 1.4rem 1.2rem; }
+  .gerber-roles {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .pillar-radar::after {
+    right: -80px; bottom: -80px;
+    opacity: 0.6;
+  }
+}
+
 .timing-bar {
   background: var(--bg);
   padding: 2.2rem 2.6rem;
@@ -1746,6 +1996,14 @@ footer .footer-tag {
   position: relative;
   z-index: 1;
 }
+.moment-signature p {
+  margin: 0.25em 0;
+  line-height: 1.4;
+}
+.moment-signature p:last-child {
+  margin-top: 0.6em;
+  font-size: 1.12em;
+}
 .moment-signature p strong {
   color: var(--red);
   font-style: normal;
@@ -2283,16 +2541,18 @@ footer .footer-tag {
 
   <div class="diagnostic-block rev" style="margin-top:2rem;">
     <div class="diagnostic-body">
-      <p>Tu as déjà eu cette intuition qui te disait de ne pas signer ce contrat. Tout était bon sur le papier. Tu as signé quand même. Et tu l'as regretté. Ou cette idée qui te réveillait à 5h du matin, que tu n'as jamais exécutée, et que tu as vu quelqu'un d'autre lancer 6 mois plus tard.</p>
+      <p>Regarde autour de toi. La plupart des business qu'on te vend comme des modèles sont construits sur du sable. On a creusé pour faire du chiffre. On a creusé pour surfer une tendance. On a creusé pour copier celui d'à côté. Mais on n'a jamais demandé à quoi ça servait. <strong>Et quand le vent tourne, tout s'effondre.</strong></p>
 
-      <p>Les neurosciences le confirment : <strong>95% de tes décisions sont prises par une partie de toi qui précède la raison.</strong> Plus de 300 études convergent sur ce point. Ce n'est pas ta stratégie consciente qui pilote ton business. C'est quelque chose de plus profond.</p>
+      <p>L'économiste <strong>Charles Gave</strong>, entrepreneur multimillionnaire, carrière indiscutable, a écrit un livre qui a fait le tour des cercles entrepreneuriaux : <em>Un Libéral Nommé Jésus.</em> Best-seller. Lu par des chrétiens, des athées, des agnostiques. Parce qu'il dit une chose simple : <strong>les business qui durent sont construits sur le roc, pas sur le sable.</strong> Sur des principes plus vieux que le capitalisme. Prendre des risques. Investir ses talents au lieu de les enterrer. Servir avant de prendre.</p>
 
-      <p>Mais la science s'arrête là. Elle explique le mécanisme, pas la source. L'économiste Charles Gave l'a montré dans <em>Un Libéral Nommé Jésus</em> : les principes de construction de valeur les plus solides ne viennent pas des business schools. Ils viennent de textes millénaires sur la nature humaine. Prendre des risques, investir ses talents au lieu de les enterrer, servir avant de prendre. Ces principes sont plus vieux que le capitalisme, et ils marchent toujours.</p>
+      <p>Un business solide ne vise pas ton enrichissement. Il vise le bien que tu peux faire aux autres à travers ce que tu vends. <strong>Et pour viser ça juste, il faut savoir qui tu es, ce que tu veux faire, et pour qui.</strong></p>
+
+      <p>Parce que tu n'es pas qu'un assemblage de neurones. Tu es <em>corps, âme et esprit.</em> Un business aligné avec toi, c'est un business qui touche les bonnes personnes, qui fait durer ton énergie, et qui te rend heureux de faire ce que tu fais.</p>
     </div>
   </div>
 
   <div class="key rev">
-    <p>Tu n'es pas qu'un assemblage de neurones. Tu es <em>corps, âme et esprit.</em> Et ce qu'un homme a de plus important, seul un autre homme peut le percevoir. Pas un algorithme. Pas une méthode. <span class="key-highlight">Un regard humain</span>, posé, exigeant et bienveillant.</p>
+    <p>Peu importe ta méthode. <em>Peu importe ton canal.</em> Ce qu'il te faut, c'est <span class="key-highlight">un regard humain,</span> posé, exigeant et bienveillant. Un regard qui te rappelle pourquoi tu fais les choses. Et qui t'aide à construire <strong>sur le roc.</strong></p>
   </div>
 </section>
 
@@ -2306,19 +2566,23 @@ footer .footer-tag {
       <h2 class="mirror-title">Si tu te reconnais dans ce que tu viens de lire... <em>moi aussi..</em></h2>
 
       <div class="mirror-body">
-        <p>Je m'appelle Mehdi Benlahoucine. Je n'ai pas de diplôme. J'ai quitté les bancs de l'école pour aller chercher un salaire, du pognon. J'avais énormément de facilité à l'école, mais je n'ai jamais été passionné par ce qu'elle me racontait.</p>
+        <p>J'ai vécu ce que j'espère que tu ne vivras jamais.</p>
 
-        <p>Comme le dit Idriss Aberkane, doublement PhD, <em>l'école m'a servi un énorme buffet avec tout et n'importe quoi, sauf que j'étais noté sur ma capacité à tout bouffer.</em> Alors qu'en fait je n'aimais que certains sujets. Ça m'a fait douter de moi alors que j'étais ultra doué.</p>
+        <p>À <strong>36 ans</strong>, je me retrouve directeur général d'une franchise à développement international. Sans diplôme. Sur la seule base de ce que j'avais construit avant. En 4 ans dans la boîte, on lève plus de <strong>4 millions d'euros.</strong> On remporte le prix d'innovation du CES de Las Vegas 2024. Et le prix de la meilleure startup à Biarritz, face à 30 concurrents.</p>
 
-        <p>Et puis le monde de l'entreprise est arrivé. Et là j'ai compris. <strong>Dans un business, ce ne sont pas tes connaissances et ta technique qui font que tu réussis.</strong> C'est ta capacité d'adaptation. Ta résilience face à l'échec. Ta clairvoyance dans l'humain. Et ta façon de pouvoir comprendre ce qui est bon pour toi ou pas.</p>
+        <p><strong>Et tout est parti en fumée.</strong></p>
 
-        <p>Pendant 8 ans, j'ai été le bras droit opérationnel de 3 startups. Pas en tant que consultant extérieur qui vient donner des conseils et qui repart. En tant que personne qui entre dans le moteur, qui le démonte, qui comprend chaque pièce, et qui le reconstruit.</p>
+        <p>Pas parce qu'on s'est planté sur le marketing. Pas parce que la R&D n'avançait pas. Pas parce qu'on ne recrutait pas bien. Tout ça, on l'avait fait comme il faut. <strong>On avait oublié une seule chose. L'humain à la tête du projet.</strong> Et cet humain, il a dilapidé les 4 millions.</p>
 
-        <p><strong>La première, une fintech sur la blockchain.</strong> On m'a fait venir pour trouver des clients. En deux semaines, j'ai compris que le vrai problème n'avait rien à voir : personne ne comprenait ce que la boîte vendait. J'ai tout repris. La promesse. Les documents. Le discours face aux investisseurs. Je suis devenu le visage du projet. C'est là que j'ai appris : <em>le bon diagnostic vaut plus que le bon plan d'action.</em></p>
+        <p>Voilà comment on se retrouve le bec dans l'eau quand on a tout bien fait comme il faut. Voilà comment on fout <em>4 ans de sa vie</em> en l'air.</p>
 
-        <p><strong>La deuxième, un fonds d'investissement.</strong> Directeur commercial de fait. Seul. Du premier contact au dernier problème. J'ai appris ce que ça veut dire de porter un business à bout de bras quand personne ne regarde.</p>
+        <p>Ce n'était pas mon premier rodéo. Pendant 8 ans avant ça, j'avais été le bras droit opérationnel de trois startups. Pas en consultant qui passe. En personne qui entre dans le moteur, qui le démonte, qui comprend chaque pièce, et qui le reconstruit.</p>
 
-        <p><strong>La troisième, la plus grosse. Une startup tech dans la distribution B2B.</strong> Là, j'ai tout porté. La levée de fonds : 4 millions d'euros. Les recrutements clés qui ont fait exploser la boîte. La direction commerciale terrain : 20 à 30 machines par mois à 7 500€ pièce. Les pitchs, les crises, les pivots. <strong>On a remporté le prix d'innovation au CES de Las Vegas 2024, et le prix de la meilleure startup à Biarritz face à 30 concurrents.</strong></p>
+        <p><strong>La première</strong>, une fintech sur la blockchain. On m'a fait venir pour trouver des clients. En deux semaines, j'ai compris que le vrai problème était ailleurs : personne ne comprenait ce que la boîte vendait. J'ai tout repris. La promesse. Les documents. Le discours face aux investisseurs. Je suis devenu le visage du projet. <em>C'est là que j'ai appris : le bon diagnostic vaut plus que le bon plan d'action.</em></p>
+
+        <p><strong>La deuxième</strong>, un fonds d'investissement. Directeur commercial de fait. Seul. Du premier contact au dernier problème.</p>
+
+        <p><strong>La troisième</strong>, je viens de te la raconter. La scale-up tech, 4M€ levés, CES 2024, Biarritz 2024. Et la chute.</p>
 
         <!-- Photos retouchées CSS — preuve VISUELLE + TANGIBLE -->
         <div class="photo-grid rev">
@@ -2375,22 +2639,30 @@ footer .footer-tag {
           </div>
           <div>
             <div class="fact-num">0</div>
-            <div class="fact-label">diplôme. Que du vécu.</div>
+            <div class="fact-label">diplôme. Du vécu. Et de la chute.</div>
           </div>
         </div>
 
-        <p>Et j'ai vu toujours la même chose. Des fondateurs brillants qui plafonnent. Pas parce que leur marché est mauvais. Pas parce que leur produit est faible. Parce qu'<strong>ils ne s'alignent plus avec ce qu'ils construisent.</strong> Parce qu'ils portent, seuls, des décisions qu'ils ne sont plus en paix de prendre. Parce que personne, autour d'eux, ne leur renvoie un regard juste.</p>
+        <p>Et j'ai toujours vu la même chose. Des fondateurs brillants qui plafonnent. Pas parce que leur marché est mauvais. Pas parce que leur produit est faible. <strong>Parce qu'ils ne s'alignent plus avec ce qu'ils construisent.</strong> Parce qu'ils portent, seuls, des décisions qu'ils ne sont plus en paix de prendre. Parce que personne, autour d'eux, ne leur renvoie un regard juste.</p>
 
-        <p>J'ai vu ce que ça coûte. J'ai payé le prix aussi. Le premier projet a planté parce que les investisseurs ont voulu sortir trop tôt. <strong>Le plus gros actif d'un business, ce n'est pas ta base client. C'est toi.</strong> Et que si tu casses, tout casse.</p>
+        <p>Chez eux. Chez moi aussi. <strong>Le plus gros actif d'un business, ce n'est pas ta base client. C'est toi.</strong> Et quand tu casses, tout casse.</p>
 
-        <p>Pendant toutes ces années, je l'ai fait pour d'autres. En contrepartie d'un salaire, d'une part, d'une rémunération indirecte. J'étais le consultant, le directeur, le bras droit.</p>
+        <p>La plupart des accompagnants que tu vas croiser n'ont jamais été à ta place. Ils ont lu les bons livres. Ils récitent les bonnes méthodes. <strong>Ils n'ont pas construit. Pas levé. Pas planté. Pas remonté.</strong></p>
 
-        <p><strong>Aujourd'hui j'arrête de le faire pour les autres. Je le fais directement pour toi.</strong> Sans intermédiaire. Sans hiérarchie. Sans intérêt caché. Mon intérêt principal, c'est ta réussite. Nous sommes liés.</p>
+        <p>Moi, je ne récite pas. Je parle d'un endroit où j'ai été. <em>Où j'ai gagné. Et où j'ai perdu.</em></p>
+
+        <p>Pendant toutes ces années, je l'ai fait pour d'autres. Contre un salaire, une part, une rémunération indirecte. J'étais le consultant, le directeur, le bras droit.</p>
+
+        <p><strong>Aujourd'hui j'arrête de le faire pour les autres. Je le fais directement pour toi. Et pour moi.</strong> Sans intermédiaire. Sans hiérarchie. Sans intérêt caché. Mon intérêt principal, c'est ta réussite. Et surtout, te voir épanoui. Parce que moi, c'est ça qui m'épanouit. Nous sommes donc liés.</p>
+
+        <p>Car je sais que c'est là que je suis le plus juste. J'ai 38 ans. <em>Je veux co-construire. Plus subir.</em></p>
       </div>
 
       <!-- Moment signature — punchline miroir fondateur -->
       <div class="moment-signature rev">
-        <p>Je suis <strong>l'associé</strong> qui n'a pas de part.</p>
+        <p>Je ne suis pas un coach.</p>
+        <p>Je suis un entrepreneur qui en accompagne d'autres.</p>
+        <p><strong>L'associé qui n'a pas de part.</strong></p>
       </div>
     </div>
   </div>
@@ -2412,41 +2684,109 @@ footer .footer-tag {
     <div class="section-line"></div>
   </div>
 
-  <div class="forge-intro rev">
-    <p class="forge-not"><span class="strike">Formation en ligne.</span> <span class="strike">Coaching générique.</span> <span class="strike">Programme collectif.</span> <span style="color:var(--deep);font-weight:600;opacity:1;">Oublie tout ça.</span></p>
-    <p class="forge-is">La Forge, c'est <em>l'associé que tu n'as pas encore recruté.</em> Pendant 12 semaines. En visio, en one-to-one. À tes côtés. Dans ta réalité.</p>
+  <div class="forge-intro-wrapper rev">
+    <div class="forge-intro-text">
+      <p class="forge-not"><span class="strike">Formation en ligne.</span> <span class="strike">Coaching générique.</span> <span class="strike">Programme collectif.</span> <span style="color:var(--deep);font-weight:600;opacity:1;">Oublie tout ça.</span></p>
+      <p class="forge-is">La Forge, c'est <em>l'associé que tu n'as pas encore recruté.</em> Pendant 12 semaines. En visio, en one-to-one. À tes côtés. Dans ta réalité.</p>
+    </div>
+    <div class="forge-intro-photo">
+      <img src="photos/20260420_mehdi-portrait-intro-offre-creme.png" alt="Mehdi Benlahoucine, fondateur ELUMA" loading="lazy">
+    </div>
   </div>
 
-  <h3 class="section-title-impact rev" style="font-size: clamp(1.5rem, 2.6vw, 2.1rem);">Trois piliers. Une seule logique.</h3>
+  <p class="forge-bridge rev">Trois piliers. <em>Pas quatre, pas cinq.</em> Parce que c'est exactement ce qu'il te manque aujourd'hui.</p>
 
-  <div class="pillars-grid">
-    <div class="pillar rev">
+  <h3 class="section-title-impact rev" style="font-size: clamp(1.5rem, 2.6vw, 2.1rem);">Trois piliers. Dans cet ordre. Pas un autre.</h3>
+
+  <div class="pillars-triangle">
+
+    <!-- PILIER 01 — haut gauche (avec trame radar arrière-plan) -->
+    <div class="pillar pillar-radar rev" data-pos="p1">
       <div class="pillar-num-ghost">01</div>
       <span class="pillar-tag">Pilier 01</span>
       <div class="pillar-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" fill="none" stroke="#F6F2EC" stroke-width="1.5"/></svg>
       </div>
       <h4 class="pillar-title">Le regard sur le fondateur</h4>
-      <p class="pillar-text">On commence par <strong>TOI</strong>. Pas par ton business. En 2 sessions, tu sauras ce qui te bloque vraiment, pourquoi tu prends certaines décisions contre ton intérêt, et ce que tu évites sans t'en rendre compte. Tu repartiras avec une carte claire de tes schémas. Pas du développement personnel flou. <strong>Une lecture chirurgicale de qui tu es quand tu décides.</strong></p>
+      <p class="pillar-text"><em>Avant ton business, toi.</em> On lit qui tu es quand tu décides. Ce que tu évites. Les décisions que tu prends contre ton propre intérêt. Ce que tu avais imaginé au départ et que tu n'as jamais appliqué. <strong>Est-ce que ton business est l'extension de toi, ou juste un outil pour aller chercher du cash ?</strong></p>
+      <p class="pillar-text">Je suis ton sparring partner. Pas ton coach, pas ton pote. <em>Je te pousse sur tes angles morts.</em> <strong>Genre : pourquoi tu baisses tes prix dès qu'un client hésite. Pourquoi tu ne factures pas ce que tu vaux. Pourquoi tu prends ce client toxique en pensant pouvoir le gérer.</strong> Certaines sessions vont te mettre mal à l'aise. C'est fait pour. <strong>Tu me remercieras.</strong></p>
     </div>
-    <div class="pillar rev">
+
+    <!-- Pont horizontal 01 ↔ 02 -->
+    <div class="pillar-bridge pillar-bridge-h rev" aria-hidden="true">
+      <span class="bridge-dot"></span>
+      <span class="bridge-dot"></span>
+      <span class="bridge-dot"></span>
+    </div>
+
+    <!-- PILIER 02 — haut droite -->
+    <div class="pillar rev" data-pos="p2">
       <div class="pillar-num-ghost">02</div>
       <span class="pillar-tag">Pilier 02</span>
       <div class="pillar-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12 L9 6 L15 12 L21 6" fill="none" stroke="#F6F2EC" stroke-width="2.2" stroke-linecap="round"/><circle cx="21" cy="6" r="2"/></svg>
       </div>
-      <h4 class="pillar-title">La vision stratégique</h4>
-      <p class="pillar-text">Une fois que tu te vois clairement, on passe à ton business. Tu sauras exactement sur quoi appuyer demain matin. Quels clients garder, lesquels lâcher. Quel canal doubler, lequel couper. <strong>Un plan d'action cousu sur ta personnalité, ton marché et ton énergie.</strong> Pas de recette générique. Des décisions que tu peux exécuter dès la fin de la session.</p>
+      <h4 class="pillar-title">Ta mission, ton marché</h4>
+      <p class="pillar-text"><em>Maintenant qu'on sait qui tu es, on regarde le terrain.</em> Qu'est-ce que tu veux vraiment faire dans ce monde. À qui tu veux le faire. Pourquoi eux et pas les autres.</p>
+      <p class="pillar-text">On confronte ce que tu fais aujourd'hui avec ce que tu devrais faire en fonction de qui tu es. On regarde si les gens à qui tu t'adresses sont les bonnes personnes. <strong>Si ton offre cadre avec ta mission, ou si elle est en décalage depuis le début.</strong></p>
+      <p class="pillar-text">Ensuite, deux chemins. Soit on appuie là où tu es déjà juste et on tape plus fort. <em>Un angle clair, clivant s'il le faut, authentique surtout.</em> Y'en a marre des promesses bullshit. <strong>Soit on corrige.</strong> Plus de demi-mesures.</p>
+      <p class="pillar-text">Tu exécutes enfin le plan que tu avais en tête à la base. Celui que tu as enterré en route. <strong>Et tu as un copilote pour tenir la barre avec toi.</strong></p>
     </div>
-    <div class="pillar rev">
+
+    <!-- Pont descendant en Y : 01+02 → 03 -->
+    <div class="pillar-bridge pillar-bridge-v rev" aria-hidden="true">
+      <span class="bridge-dot"></span>
+      <span class="bridge-dot"></span>
+      <span class="bridge-arrow">▼</span>
+    </div>
+
+    <!-- PILIER 03 — bas, pleine largeur, avec encart Gerber -->
+    <div class="pillar pillar-wide rev" data-pos="p3">
       <div class="pillar-num-ghost">03</div>
       <span class="pillar-tag">Pilier 03</span>
       <div class="pillar-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="16" height="12" rx="1" fill="none" stroke="#F6F2EC" stroke-width="1.8"/><path d="M8 10 L10 12 L8 14" fill="none" stroke="#F6F2EC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 14 L16 14" stroke="#F6F2EC" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z" fill="none" stroke="#F6F2EC" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" fill="#F6F2EC"/></svg>
       </div>
-      <h4 class="pillar-title">L'IA comme accélérateur</h4>
-      <p class="pillar-text">Pas l'IA comme gadget. <strong>L'IA comme bras droit silencieux</strong> qui tourne 24/7 pour toi. Automatisations concrètes, outils sur mesure. ELUMA est elle-même construite avec l'IA. Tu ne me paies pas pour des théories, tu me paies pour des systèmes qui tournent.</p>
+      <h4 class="pillar-title">La méthode pour sortir de la roue</h4>
+      <p class="pillar-subtitle">Rééquilibrer Entrepreneur, Manager, Technicien.</p>
+
+      <!-- ENCART GERBER -->
+      <div class="gerber-box">
+        <p class="gerber-intro"><strong>Michael Gerber l'a écrit il y a 40 ans dans E-Myth.</strong> <em>Trois casquettes. Tu les portes toutes les trois.</em> <strong>Mais tu les portes dans le mauvais ordre.</strong></p>
+
+        <div class="gerber-roles">
+          <div class="gerber-role">
+            <span class="gerber-role-name">Entrepreneur</span>
+            <span class="gerber-role-time">(futur)</span>
+            <p class="gerber-role-desc">Le visionnaire. Celui qui décide où tu vas. Qui détecte les tendances. Qui construit la mission.</p>
+          </div>
+          <div class="gerber-role">
+            <span class="gerber-role-name">Manager</span>
+            <span class="gerber-role-time">(passé)</span>
+            <p class="gerber-role-desc">L'organisateur. Celui qui met les processus en place. Qui structure. Qui délègue. Qui capitalise sur ce qui a déjà marché.</p>
+          </div>
+          <div class="gerber-role">
+            <span class="gerber-role-name">Technicien</span>
+            <span class="gerber-role-time">(présent)</span>
+            <p class="gerber-role-desc">L'exécutant. Celui qui livre, qui facture, qui répond aux mails. Celui qui tient la boutique ouverte aujourd'hui.</p>
+          </div>
+        </div>
+
+        <div class="gerber-pivot">
+          <p>Une boîte saine équilibre les trois. <strong>Toi, tu vis à l'envers.</strong></p>
+          <p><em>Tu voulais devenir entrepreneur pour toucher la liberté. Tu es devenu salarié de ta propre boîte. Même schéma qu'avant, en pire : plus de stress, moins de sécurité, toujours autant de patrons.</em> <strong>C'est pour ça que rien ne te rend heureux, même quand les chiffres rentrent.</strong></p>
+          <p class="gerber-pivot-end"><strong>On remet tout droit.</strong></p>
+        </div>
+      </div>
+
+      <!-- PROMESSE PILIER 3 -->
+      <p class="pillar-text"><em>Aujourd'hui, tu es probablement 70% technicien, 15% manager, 15% entrepreneur.</em> Ce qu'il te faut, c'est inverser la pente.</p>
+      <p class="pillar-text"><strong>D'abord, on sort du technicien.</strong> On liste ce qui te bouffe tes semaines. Tâches répétitives, suivis clients, relances, reporting, compta. On trie en trois piles : <em>à supprimer, à automatiser, à déléguer.</em> Tu récupères tes premières heures.</p>
+      <p class="pillar-text"><strong>Ensuite, on installe le manager.</strong> Processus simples et documentés. Routines hebdomadaires qui tournent sans toi. Un outil sur mesure construit avec l'IA pour ton business (suivi client, génération de propositions depuis tes fichiers, synthèses de calls, relances automatiques). <em>L'IA là où elle a un effet de levier réel. Pas partout pour faire bien.</em></p>
+      <p class="pillar-text"><strong>Enfin, on libère l'entrepreneur.</strong> Une fois que le manager tient la structure, tu dégages enfin le temps de redevenir celui que tu étais au départ. <em>Celui qui pense la suite. Qui ajuste la vision. Qui décide où va la boîte.</em> Pas celui qui court derrière ses mails.</p>
+      <p class="pillar-text pillar-text-closer"><strong>12 semaines plus tard, tu ne tiens plus ta boîte à bout de bras. Tu la diriges.</strong></p>
     </div>
+
   </div>
 
   <div class="timing-bar rev">
