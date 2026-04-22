@@ -3081,26 +3081,44 @@ footer .footer-tag {
      ============================================ -->
 <section class="section">
   <div class="spouse-card rev">
-    <span class="spouse-tag">Un mot pour les deux</span>
-    <h3 class="spouse-title">Tu ne prends pas cette décision seul(e). Et c'est normal.</h3>
+    <span class="spouse-tag">Un mot avant de candidater</span>
+    <h3 class="spouse-title">Cette décision, tu la prends seul(e) ?</h3>
     <div class="spouse-body">
-      <p>Si tu es en couple, la personne qui partage ta vie vit ton business avec toi, même sans le comprendre. Elle vit les dimanches soirs. Les mois galères. Les décisions que tu portes seul(e) à 2h du matin.</p>
-      <p>Ton/ta conjoint(e) peut parfois être un obstacle sans le vouloir. Parce qu'il/elle ne comprend pas ce que tu construis. Parce que vous décidez ensemble de vos investissements. Ou simplement parce qu'il/elle te challenge sur tes prochains pas.</p>
-      <p><strong>Dans certains cas, la seule façon d'avancer, c'est qu'on soit trois dans le même bureau.</strong> Si le pré-audit révèle que l'enjeu se joue aussi à la maison, je te propose que ton/ta conjoint(e) participe au rendez-vous. On fait le point ensemble. Alignés.</p>
+      <p>Certains fondateurs décident seuls. D'autres ont quelqu'un dans leur vie — un(e) partenaire, un proche, un associé — dont l'avis compte ou dont l'accord est nécessaire. Ce n'est pas un jugement. C'est une réalité que je préfère connaître.</p>
 
-      <div class="spouse-options">
-        <div class="spouse-option" onclick="toggleSpouse(this)">
+      <div class="spouse-options" id="spouse-q1">
+        <div class="spouse-option" onclick="toggleSpouseQ1(this, 'alone')">
           <div class="spouse-option-check"></div>
           <div class="spouse-option-label">
-            <strong>Oui, j'inclurai mon/ma conjoint(e).</strong>
-            On avance ensemble. C'est le bon moment pour qu'il/elle soit au courant et qu'on s'aligne.
+            <strong>Oui, je décide seul(e).</strong>
+            <em>Aucune contrainte extérieure. On avance.</em>
           </div>
         </div>
-        <div class="spouse-option" onclick="toggleSpouse(this)">
+        <div class="spouse-option" onclick="toggleSpouseQ1(this, 'notalone')">
           <div class="spouse-option-check"></div>
           <div class="spouse-option-label">
-            <strong>Non, ça reste entre nous pour l'instant.</strong>
-            <em>Je gère de mon côté. Il/elle n'a pas besoin de savoir tout de suite.</em>
+            <strong>Non, quelqu'un d'autre est dans la boucle.</strong>
+            <em>Un proche, un(e) partenaire, un associé — son avis ou son accord compte.</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="spouse-subq" id="spouse-q2" style="display:none;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--soft);">
+        <p style="margin-bottom:1rem;font-weight:600;">Est-ce qu'on l'inclut dans le pré-audit ?</p>
+        <div class="spouse-options">
+          <div class="spouse-option" onclick="toggleSpouseQ2(this)">
+            <div class="spouse-option-check"></div>
+            <div class="spouse-option-label">
+              <strong>Oui, il/elle sera là.</strong>
+              <em>Mieux vaut être alignés dès le départ. On fait le point à trois.</em>
+            </div>
+          </div>
+          <div class="spouse-option" onclick="toggleSpouseQ2(this)">
+            <div class="spouse-option-check"></div>
+            <div class="spouse-option-label">
+              <strong>Non, ça reste entre nous pour l'instant.</strong>
+              <em>Je gère de mon côté d'abord.</em>
+            </div>
           </div>
         </div>
       </div>
@@ -3335,9 +3353,21 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-/* Spouse options toggle */
-function toggleSpouse(el) {
-  const parent = el.parentElement;
+/* Spouse options toggle — Q1 : seul ou pas seul */
+function toggleSpouseQ1(el, answer) {
+  document.querySelectorAll('#spouse-q1 .spouse-option').forEach(opt => opt.classList.remove('selected'));
+  el.classList.add('selected');
+  const q2 = document.getElementById('spouse-q2');
+  if (answer === 'notalone') {
+    q2.style.display = 'block';
+    document.querySelectorAll('#spouse-q2 .spouse-option').forEach(opt => opt.classList.remove('selected'));
+  } else {
+    q2.style.display = 'none';
+  }
+}
+/* Spouse Q2 : inclure ou pas */
+function toggleSpouseQ2(el) {
+  const parent = el.closest('.spouse-options');
   parent.querySelectorAll('.spouse-option').forEach(opt => opt.classList.remove('selected'));
   el.classList.add('selected');
 }
