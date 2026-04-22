@@ -1141,6 +1141,37 @@ body {
   position: relative; z-index: 1;
 }
 
+/* === BLOC 5 — Paragraphes structurés du ia-block (Pilier 3 · Bilan économique) === */
+.ia-text-scene {
+  margin-bottom: 1rem;
+}
+.ia-text-scene em {
+  color: var(--red);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.ia-text-bridge {
+  margin: 1rem 0 1.4rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--red);
+}
+.ia-text-bridge em {
+  font-family: var(--serif);
+  font-style: italic;
+}
+.ia-text-closer {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(52,58,63,0.12);
+}
+.ia-text-closer em {
+  color: var(--red);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
 .contrast-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1268,6 +1299,8 @@ body {
   box-shadow: 0 1px 3px rgba(52,58,63,0.04), 0 6px 28px rgba(52,58,63,0.09);
   border-top: 3px solid var(--red);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 .pillar-proof:hover { transform: translateY(-3px); }
 .pillar-proof-tag {
@@ -1294,6 +1327,7 @@ body {
   color: var(--text);
   line-height: 1.65;
   opacity: 0.88;
+  flex: 1;
 }
 
 .testimonials-placeholder {
@@ -2133,51 +2167,6 @@ footer .footer-tag {
 }
 .cred-pill svg { width: 56px; height: 56px; }
 
-/* Tracker screenshots — preuve TANGIBLE de l'IA */
-.tracker-showcase {
-  margin: 2.2rem 0 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
-}
-.tracker-frame {
-  position: relative;
-  border-radius: 6px;
-  overflow: hidden;
-  background: var(--deep);
-  padding: 0.35rem;
-  box-shadow:
-    0 1px 3px rgba(52,58,63,0.12),
-    0 14px 42px rgba(52,58,63,0.2);
-  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
-}
-.tracker-frame:hover { transform: translateY(-3px); }
-.tracker-frame img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px;
-}
-.tracker-frame::before {
-  content: '';
-  position: absolute;
-  top: 0.35rem; left: 0.35rem; right: 0.35rem;
-  height: 22px;
-  background: linear-gradient(180deg, rgba(52,58,63,0.85) 0%, transparent 100%);
-  border-radius: 4px 4px 0 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.tracker-caption {
-  font-family: var(--display);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.6rem;
-  text-align: center;
-}
 
 /* CTA hiérarchie — 5 niveaux */
 .btn-cta-outline {
@@ -2324,18 +2313,64 @@ footer .footer-tag {
   font-size: 0.82rem;
   letter-spacing: 0.12em;
 }
-.testimonial-anon-badge {
-  display: inline-block;
-  padding: 0.25rem 0.65rem;
-  background: rgba(205,191,182,0.35);
-  color: var(--muted);
+.testimonial-card {
+  background: var(--bg);
+  border: 1px solid var(--soft);
+  border-radius: 6px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(52,58,63,0.06), 0 6px 28px rgba(52,58,63,0.08);
+}
+.testimonial-role-tag {
   font-family: var(--display);
-  font-weight: 600;
-  font-size: 0.64rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--red);
   text-transform: uppercase;
-  border-radius: 2px;
-  margin-bottom: 0.9rem;
+  letter-spacing: 0.14em;
+  border-bottom: 1px solid rgba(196,53,49,0.18);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.testimonial-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+.testimonial-identity strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+}
+.testimonial-identity span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.testimonial-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+  flex: 1;
+}
+.testimonials-recap {
+  background: var(--bg2);
+  border-left: 3px solid var(--red);
+  border-radius: 4px;
+  padding: 1.2rem 1.8rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+.testimonials-recap-text {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0;
 }
 
 /* Encadré 3 clients — cercles concentriques (override des carrés) */
@@ -2379,7 +2414,6 @@ footer .footer-tag {
   .moment-pivot { margin: 2.5rem -1rem; padding: 3rem 1.5rem; }
   .moment-signature { padding: 2.2rem 1.6rem; }
   .photo-grid { grid-template-columns: 1fr; }
-  .tracker-showcase { grid-template-columns: 1fr; }
   .bandeau { padding: 1.1rem 1.5rem; font-size: 0.92rem; }
   .bandeau::before, .bandeau::after { width: 18px; margin: 0 0.6rem; }
   .final-cta { padding: 3.2rem 1.6rem !important; }
@@ -2804,7 +2838,7 @@ footer .footer-tag {
       <span class="timing-arrow">→</span>
       <div class="timing-block">
         <span class="timing-num">Autonomie</span>
-        <span class="timing-sub">Les outils restent. Le cadre aussi.</span>
+        <span class="timing-sub">Les méthodes restent. Le cadre aussi.</span>
       </div>
     </div>
   </div>
@@ -2812,7 +2846,7 @@ footer .footer-tag {
   <div class="diagnostic-block rev" style="margin-top:2rem;border-left-width:4px;">
     <p class="diagnostic-rupture">En pratique, ça ressemble à quoi ?</p>
     <div class="diagnostic-body">
-      <p><strong>1 session par semaine en visio one-to-one</strong> (pas un groupe, pas un replay). Chaque session couvre 4 couches : toi en tant que fondateur, ta stratégie, l'IA appliquée à ton business, et les actions terrain de la semaine.</p>
+      <p><strong>1 session par semaine en visio one-to-one</strong> (pas un groupe, pas un replay). Chaque session couvre 4 couches : toi en tant que fondateur, ta stratégie, <strong>ta méthode pour sortir de la roue</strong>, et les actions terrain de la semaine.</p>
       <p>Entre les sessions : accès direct à moi. Questions, doutes, décisions urgentes. Tu n'es plus seul(e) avec tes choix.</p>
     </div>
   </div>
@@ -2828,25 +2862,13 @@ footer .footer-tag {
     </div>
   </div>
 
-  <!-- Screenshots ELUMA Tracker — preuve TANGIBLE IA -->
-  <div class="tracker-showcase rev">
-    <div>
-      <div class="tracker-frame">
-        <img src="photos/Timetracker 1.png" alt="ELUMA Tracker — gestion des tâches" loading="lazy">
-      </div>
-      <p class="tracker-caption">ELUMA Tracker · Gestion temps réel</p>
-    </div>
-    <div>
-      <div class="tracker-frame">
-        <img src="photos/Timetracker 2.png" alt="ELUMA Tracker — analytics" loading="lazy">
-      </div>
-      <p class="tracker-caption">Analytics fondateur · Construit avec l'IA</p>
-    </div>
-  </div>
+  <!-- [BLOC 10] Placeholder libéré. Hypothèse : 4 leviers IA en mini-cards. À décider. -->
 
   <div class="ia-block rev">
-    <span class="ia-tag">L'IA en chiffres concrets</span>
-    <h3 class="ia-title">Ton temps est ton premier actif. Récupère-le.</h3>
+    <span class="ia-tag">Pilier 3 · Bilan économique</span>
+    <h3 class="ia-title">Ce que tu récupères quand on te sort du technicien.</h3>
+    <p class="ia-text ia-text-scene"><em>Un mardi matin. Tu regardes ton agenda.</em> Relances clients. Propositions à réécrire. Factures à envoyer. Compta à ranger. Mails qui s'empilent. Tu ne décides plus rien de stratégique de la journée. <strong>Tu exécutes.</strong></p>
+    <p class="ia-text ia-text-bridge">Pilier 3, ça casse ce cycle. <em>On trie tes tâches en trois piles : à supprimer, à automatiser, à déléguer.</em> Tu récupères <strong>au minimum 4 heures par semaine</strong>.</p>
     <div class="ia-calc">
       <span class="ia-calc-num">4h / semaine</span>
       <span class="ia-calc-op">×</span>
@@ -2854,7 +2876,7 @@ footer .footer-tag {
       <span class="ia-calc-op">=</span>
       <span class="ia-calc-num">1 600€ / mois récupérés.</span>
     </div>
-    <p class="ia-text">C'est l'équivalent minimum que tu récupères en automatisant ce qui peut l'être. Pour un solopreneur, c'est ta charge marketing. Pour un entrepreneur, c'est un collaborateur. Et tu le récupères à vie. Les automatisations tournent sans que je sois là.</p>
+    <p class="ia-text ia-text-closer"><strong>Chaque mois. À vie.</strong> Parce que les systèmes mis en place tournent sans que je sois là. Pour un solopreneur, c'est ta charge marketing. Pour un entrepreneur, c'est un collaborateur. <em>C'est ça, sortir de la roue.</em></p>
   </div>
 
   <h3 class="section-title-impact rev" style="font-size:clamp(1.4rem,2.4vw,1.9rem);margin-top:3rem;">Ce que tu ne trouveras pas ailleurs.</h3>
@@ -2901,64 +2923,106 @@ footer .footer-tag {
     <h3 class="proof-credo-title">Je ne te vends pas du rêve. <em>Je te vends une vérité vérifiable.</em></h3>
     <div class="proof-credo-body">
       <p>Je n'ai pas 100 témoignages clients coaching. Je démarre cette offre maintenant. Alors voici ce que j'ai à la place, et ce que tu peux vérifier par toi-même :</p>
-      <p><strong>Un parcours réel.</strong> Pas de titre ronflant, mais 8 ans sur le terrain, 3 sociétés structurées, plus de 5 millions d'euros levés. Sans diplôme. Par la vision et le travail.</p>
-      <p><strong>Un engagement total.</strong> Cette fois j'arrête de le faire pour les autres contre un salaire ou une récompense indirecte. Je le fais directement pour toi. <em>Mon intérêt principal, c'est ta réussite. Nous sommes liés.</em></p>
-      <p><strong>Une démonstration offerte.</strong> 45 min de pré-audit où tu repars avec une analyse concrète, offerte, sans engagement. Je te prouve qui je suis en face à face. Si tu n'es pas convaincu après ça, tu n'as rien perdu sauf 45 min de ton temps.</p>
+      <p><strong>Un parcours réel.</strong> Pas de titre ronflant, mais 8 ans sur le terrain, 3 sociétés structurées, plus de 5 millions d'euros levés. Sans diplôme. Par la vision et le travail. <strong>Et des chutes encaissées.</strong> En saut acrobatique olympique, la médaille d'or se gagnait à 30 ans dans les années 90. Aujourd'hui à 18 ans, grâce aux airbags qui permettent aux athlètes de chuter sans se blesser et de progresser plus vite. <strong>Dans l'entrepreneuriat, c'est pareil : chaque chute encaissée, c'est un diplôme. J'en ai plusieurs.</strong></p>
+      <p><strong>Une démonstration offerte.</strong> 45 min en face à face. Toi, tu ressors avec un regard neuf sur ton business, des angles morts que personne ne t'avait jamais renvoyés, et une direction concrète à tester dès la semaine qui suit. Moi, j'aurai investi 3 heures de cerveau d'associé pour préparer, analyser, te livrer. <strong>Tester gratuitement, pendant 3 heures, un associé qui passe au crible toi et ton business. Tu fais déjà une affaire.</strong></p>
     </div>
   </div>
 
   <div class="pillars-proof">
+
+    <!-- CARTE 1 — Vécu -->
     <div class="pillar-proof rev">
-      <span class="pillar-proof-tag">Parcours</span>
-      <h4 class="pillar-proof-title">8 ans sur le terrain</h4>
-      <p class="pillar-proof-text">3 sociétés dont j'ai été l'élément clé. 5M€+ levés. Des projets documentés publiquement.</p>
+      <span class="pillar-proof-tag">Vécu</span>
+      <h4 class="pillar-proof-title">La montée ET la chute.</h4>
+      <p class="pillar-proof-text">4M€ levés. CES Las Vegas 2024. DG à 36 ans, sans diplôme. Puis tout parti en fumée. Les autres ne racontent que la moitié de leur histoire. Moi, je raconte les deux. <strong>La descente apprend ce que la montée n'enseigne jamais.</strong></p>
     </div>
+
+    <!-- CARTE 2 — Formation -->
     <div class="pillar-proof rev">
       <span class="pillar-proof-tag">Formation</span>
-      <h4 class="pillar-proof-title">Neurosciences appliquées</h4>
-      <p class="pillar-proof-text">2 ans de collaboration avec un cabinet spécialisé en neurosciences de la persuasion. Base : 300+ études scientifiques.</p>
+      <h4 class="pillar-proof-title">Pas un diplôme. Une bibliothèque.</h4>
+      <p class="pillar-proof-text">Zéro MBA. Des années en profondeur dans plusieurs entreprises, à tous les niveaux : opérationnel, stratégique, direction. Des milliers d'heures en psychologie, philosophie, théologie, processus. 2 ans avec un cabinet de neurosciences appliquées (300+ études décortiquées). <strong>Tout ce que je te transmets, je l'ai d'abord encaissé. Dans mon corps. Dans mes boîtes. Dans mes chutes.</strong> <strong>Je ne m'arrête pas d'apprendre.</strong></p>
     </div>
+
+    <!-- CARTE 3 — Socle -->
     <div class="pillar-proof rev">
-      <span class="pillar-proof-tag">Méthode</span>
-      <h4 class="pillar-proof-title">Corps, âme, esprit</h4>
-      <p class="pillar-proof-text">Un cadre ancré dans la science, enrichi d'une lecture humaine et spirituelle. La science seule ne voit que le corps.</p>
+      <span class="pillar-proof-tag">Socle</span>
+      <h4 class="pillar-proof-title">Chrétien. Pas missionnaire.</h4>
+      <p class="pillar-proof-text">Mes principes viennent de la Bible : <strong>la vérité, la charité, le service à autrui, la prise de risque, l'investissement de ses talents au lieu de les enterrer, et surtout l'éthique.</strong> Je te le dis par transparence, pas pour t'évangéliser. <strong>Pas de &laquo; pouvoir de l'univers &raquo;. Pas de &laquo; visualise et reçois &raquo;. Pas de mysticisme déguisé en business.</strong> Tu n'as pas à partager ma foi pour bosser avec moi. Tu dois juste savoir d'où je parle. <strong>Exactement comme chez Charles Gave : les principes sont le socle, les valeurs aussi. La technique n'en est que la conséquence. Et c'est elle que je déploie dans ton business.</strong></p>
     </div>
+
+    <!-- CARTE 4 — Essai -->
     <div class="pillar-proof rev">
-      <span class="pillar-proof-tag">Démonstration</span>
-      <h4 class="pillar-proof-title">45 min offertes</h4>
-      <p class="pillar-proof-text">Tu repars avec une analyse écrite de ta situation. Mon investissement en temps. Tu décides après.</p>
+      <span class="pillar-proof-tag">Essai</span>
+      <h4 class="pillar-proof-title">3h d'associé en test gratuit. Sérieusement.</h4>
+      <p class="pillar-proof-text">45 min en face à face. <strong>Plus 2 heures, de mon côté, pour préparer le call et décortiquer ton business.</strong> Tu repars avec un regard extérieur sur tes angles morts, 2 à 3 directions out of the box que personne ne t'a jamais suggérées, et de quoi te dire : &laquo; attends, j'ai testé un associé gratos, c'est légal ? &raquo; <strong>Oui. Et c'est fait exprès.</strong></p>
     </div>
+
   </div>
 
-  <!-- TÉMOIGNAGES RÉELS -->
-  <div style="margin:3rem 0;">
-    <h3 class="rev" style="font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,2.2vw,1.6rem);color:var(--deep);margin-bottom:1.8rem;letter-spacing:-0.015em;">Ce que disent ceux qui ont travaillé avec moi.</h3>
+  <!-- TÉMOIGNAGES RÉELS — 4 cartes nommées, rôle joué en hiérarchie haute -->
+  <div class="testimonials-block" style="margin:3rem 0;">
+    <h3 class="rev" style="font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,2.2vw,1.6rem);color:var(--deep);margin-bottom:1.8rem;letter-spacing:-0.015em;">Ils m'ont eu à leurs côtés pendant des années. <em>Voici ce qu'ils en disent.</em></h3>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+    <div class="testimonials-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
 
-      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
-        <div class="testimonial-photo">
+      <!-- Carte 1 — Danny P. (sparring partner · 10 ans) -->
+      <div class="card testimonial-card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;display:flex;flex-direction:column;">
+        <span class="testimonial-role-tag">J'ai été son sparring partner</span>
+        <div class="testimonial-identity">
           <div class="testimonial-avatar">D</div>
           <div class="testimonial-meta">
-            <strong>Danny</strong>
+            <strong>Danny P.</strong>
             Entrepreneur · 10 ans de collaboration
           </div>
         </div>
-        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;">"Si un entrepreneur me demandait un avis sur toi, je lui dirais directement de foncer. Mehdi te dira clairement ce qui ne va pas. Il va identifier tes points faibles et t'aider à les transformer en force, sans jugement, toujours de manière constructive. Tu auras plus qu'un entrepreneur : tu auras un partenaire. Et ça, je peux le garantir à 110%."</p>
+        <p class="testimonial-quote">"Si un entrepreneur me demandait un avis sur toi, je lui dirais directement de foncer. Mehdi te dira clairement ce qui ne va pas. Il va identifier tes points faibles et t'aider à les transformer en force, sans jugement, toujours de manière constructive. Tu auras plus qu'un entrepreneur : tu auras un partenaire. Et ça, je peux le garantir à 110%."</p>
       </div>
 
-      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
-        <span class="testimonial-anon-badge">Témoignage anonymisé</span>
-        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;margin-bottom:1.2rem;">"Ce qui est frappant, c'est la confiance que Mehdi dégage, car ses propos sont justes et sa ligne de conduite reste la même. Son implication à 100%, son discours clair sans concession, l'analyse professionnelle du projet qu'il connaît sur le bout des doigts. Fonce, tu ne le regretteras pas."</p>
-        <p style="font-family:var(--display);font-weight:700;font-size:0.82rem;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;">F. — Fondateur Fintech</p>
+      <!-- Carte 2 — Myriam (co-pilote · 5 ans) -->
+      <div class="card testimonial-card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;display:flex;flex-direction:column;">
+        <span class="testimonial-role-tag">J'ai été son co-pilote</span>
+        <div class="testimonial-identity">
+          <div class="testimonial-avatar">M</div>
+          <div class="testimonial-meta">
+            <strong>Myriam</strong>
+            Entrepreneuse · 5 ans de collaboration
+          </div>
+        </div>
+        <p class="testimonial-quote">"Ta structure m'a permis de concrétiser ces voix que je mettais en sourdine et à réaliser quelle était ma vraie valeur. Même lorsqu'on se croit capable seul parce qu'on a confiance en nos compétences, tu nous ouvres les yeux sur pas mal de points qu'on ne voit pas étant seuls. Le cadre que tu amènes permet un départ sain et ça évite de perdre du temps en tâtonnant de son côté."</p>
       </div>
 
-      <div class="card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;">
-        <span class="testimonial-anon-badge">Témoignage anonymisé</span>
-        <p style="font-family:var(--serif);font-style:italic;color:var(--deep);font-size:1.02rem;line-height:1.7;margin-bottom:1.2rem;">"Tu as la maturité et l'expérience pour aider un partenaire à travailler sur des points clés que tu maîtrises : l'introspection, le plan d'action, la mise en marche, le résultat. Il peut se laisser aller en toute confiance entre tes mains."</p>
-        <p style="font-family:var(--display);font-weight:700;font-size:0.82rem;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;">M. — Entrepreneur</p>
+      <!-- Carte 3 — Frédéric B. (consultant · 3 ans) -->
+      <div class="card testimonial-card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;display:flex;flex-direction:column;">
+        <span class="testimonial-role-tag">J'ai été son consultant</span>
+        <div class="testimonial-identity">
+          <div class="testimonial-avatar">F</div>
+          <div class="testimonial-meta">
+            <strong>Frédéric B.</strong>
+            Fondateur Fintech · 3 ans de collaboration
+          </div>
+        </div>
+        <p class="testimonial-quote">"Ce qui est frappant, c'est la confiance que Mehdi dégage, car ses propos sont justes et sa ligne de conduite reste la même. Son implication à 100%, son discours clair sans concession, l'analyse professionnelle du projet qu'il connaît sur le bout des doigts. Fonce, tu ne le regretteras pas."</p>
       </div>
 
+      <!-- Carte 4 — Mathieu L. (directeur des ventes · 3 ans) -->
+      <div class="card testimonial-card rev" style="border-top:3px solid var(--red);padding:2rem 2.2rem;display:flex;flex-direction:column;">
+        <span class="testimonial-role-tag">J'ai été son directeur des ventes</span>
+        <div class="testimonial-identity">
+          <div class="testimonial-avatar">M</div>
+          <div class="testimonial-meta">
+            <strong>Mathieu L.</strong>
+            Entrepreneur · 3 ans de collaboration
+          </div>
+        </div>
+        <p class="testimonial-quote">"Tu as la maturité et l'expérience pour aider un partenaire à travailler sur des points clés que tu maîtrises : l'introspection, le plan d'action, la mise en marche, le résultat. Il peut se laisser aller en toute confiance entre tes mains."</p>
+      </div>
+
+    </div>
+
+    <!-- Bloc récap — scelle le message des 4 témoignages -->
+    <div class="testimonials-recap rev">
+      <p class="testimonials-recap-text"><strong>4 rôles. 4 entrepreneurs.</strong> 1 seul homme à leurs côtés, <em>parfois 10 ans durant.</em></p>
     </div>
   </div>
 
@@ -3097,8 +3161,9 @@ footer .footer-tag {
       <span class="faq-plus">+</span>
     </button>
     <div class="faq-a">
-      <p>Un coach classique te donne des méthodes. Des outils. Des cadres. Il te pousse à faire ce que TOI tu décides.</p>
-      <p>Moi, je commence par te regarder en face pour comprendre qui tu es, ce qui te bloque, ce qui te ressemble vraiment. Ensuite seulement on construit le business, <strong>en cohérence avec toi</strong>, pas contre toi. Et j'apporte l'IA pour que ce qu'on construit tourne sans toi.</p>
+      <p>Un coach classique te donne des méthodes. Des outils. Des cadres. Il te pousse à faire ce que TOI tu décides, en te promettant souvent l'abondance, la liberté, la richesse.</p>
+      <p>Moi, je commence par te regarder en face pour comprendre qui tu es, ce qui te bloque, ce qui te ressemble vraiment. Ensuite seulement on construit le business, <strong>en cohérence avec toi</strong>, pas contre toi.</p>
+      <p><strong>Je te promets l'abondance aussi</strong>, mais pas comme un produit qu'on te vend. <em>L'abondance est une conséquence</em> : quand tu es aligné avec qui tu es, tu aimes ce que tu fais, tu attires les bons clients, et l'argent suit. Je te promets de <strong>t'aligner pour pouvoir la recevoir</strong>, pas de te la servir sur un plateau.</p>
       <p>Je suis <em>l'associé temporaire qui n'a pas de part.</em> Pas le coach qui part avec ta carte bleue.</p>
     </div>
   </div>
@@ -3127,7 +3192,8 @@ footer .footer-tag {
       . Une méthode ancrée dans les neurosciences et 300+ études scientifiques.<br>
       . Une offre qui te donne une démo offerte avant tout engagement.<br>
       . Un positionnement qui refuse volontairement ceux qui cherchent du magique.</p>
-      <p>Si après le pré-audit tu n'es pas convaincu(e), tu ne reviens pas. Tu auras quand même ton analyse écrite en poche. <em>C'est tout ce que tu risques.</em></p>
+      <p>Si après le pré-audit tu n'es pas convaincu(e), tu ne reviens pas. Tu auras quand même ton analyse écrite en poche.</p>
+      <p><strong>Tester 3 heures un associé qui passe au crible toi et ton business, gratuitement : tu fais déjà une affaire.</strong> <em>Le reste, c'est ton choix.</em></p>
     </div>
   </div>
 
@@ -3150,8 +3216,8 @@ footer .footer-tag {
     </button>
     <div class="faq-a">
       <p>Tu ne seras pas le premier à me dire ça. Et tu ne seras pas le premier à être surpris en 45 minutes.</p>
-      <p>Je ne dis pas ça par arrogance. Je dis ça parce que la plupart du temps, quand une situation paraît "impossible à expliquer", c'est qu'elle n'a jamais vraiment été décortiquée par quelqu'un qui sait où regarder. Les neurosciences combinées à une lecture humaine profonde permettent de lire des schémas que tu n'as peut-être même pas vus toi-même.</p>
-      <p>Essaie. 45 minutes. Si je ne comprends rien, tu n'auras rien perdu.</p>
+      <p>Je ne dis pas ça par arrogance. Je dis ça parce que <strong>ma zone de génie, c'est comprendre les humains.</strong> Pas les grilles, pas les méthodes, pas les cases. Les humains. Quand une situation paraît "impossible à expliquer", c'est souvent qu'elle n'a jamais été décortiquée par quelqu'un qui sait où regarder vraiment — dans ce que tu dis et dans ce que tu ne dis pas.</p>
+      <p>Essaie. 45 minutes. Dans le pire des cas, je ne comprends rien et tu n'auras rien perdu. Dans le meilleur, <strong>tu repars avec des angles morts que tu n'avais jamais vus</strong>, et <em>au minimum tu auras été réellement écouté.</em> Ce qui, déjà, est rare.</p>
     </div>
   </div>
 
@@ -3163,7 +3229,8 @@ footer .footer-tag {
     <div class="faq-a">
       <p>Il n'y en a pas. Mais je comprends la question. On a tous vu trop de "calls découverte" déguisés en pitchs de 45 min.</p>
       <p>Voici la vérité : je consacre 2 à 3 heures de mon temps par pré-audit (préparation, appel, restitution écrite). Je ne le fais que pour des profils que j'ai qualifiés au préalable via le formulaire. <strong>Si tu passes le filtre, c'est que je pense sincèrement pouvoir t'aider, ou au minimum te donner une vraie lecture de ta situation.</strong></p>
-      <p>Pas de pression à la fin. Pas de "remise exceptionnelle si tu signes maintenant". Je te dis ce que je vois, je te laisse avec ton mini-rapport, et je te laisse décider.</p>
+      <p>Et il faut que tu saches une chose : <strong>le pré-audit, c'est aussi ma manière de choisir qui je prends.</strong> Je ne travaille qu'avec <strong>3 personnes en simultané</strong>. Donc ce rendez-vous, c'est aussi moi qui décide si je veux travailler avec toi. C'est une sélection dans les deux sens.</p>
+      <p>Pas de pression à la fin. Pas de "remise exceptionnelle si tu signes maintenant". Je te dis ce que je vois, je te laisse avec ton mini-rapport, et je te laisse décider. <em>Peut-être qu'un jour ce pré-audit sera payant</em> — c'est une vraie heure de cerveau d'associé. Pour l'instant, il ne l'est pas.</p>
     </div>
   </div>
 </section>
