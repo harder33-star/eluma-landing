@@ -1741,6 +1741,198 @@ body {
 }
 
 /* ============================================
+   NAV STICKY
+   ============================================ */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  height: 56px;
+  background: rgba(52,58,63,0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgba(205,191,182,0.1);
+  transition: box-shadow 0.3s ease;
+}
+.site-nav.scrolled { box-shadow: 0 2px 20px rgba(32,38,41,0.4); }
+.site-nav-logo {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--bg);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.site-nav-logo span { color: var(--red); }
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.site-nav-links a {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(246,242,236,0.6);
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.site-nav-links a:hover { color: var(--bg); background: rgba(246,242,236,0.08); }
+.site-nav-links a.nav-active { color: var(--red); }
+.site-nav-cta {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--red);
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border-radius: 3px;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.site-nav-cta:hover { opacity: 0.88; }
+#section-miroir, #section-offre, #section-preuves,
+#section-qualifier, #section-faq, #cta-final {
+  scroll-margin-top: 68px;
+}
+body { padding-top: 56px; }
+@media (max-width: 700px) {
+  .site-nav-links { display: none; }
+  .site-nav { padding: 0 1rem; }
+}
+
+/* ============================================
+   CGV MODAL
+   ============================================ */
+.cgv-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(32,38,41,0.78);
+  z-index: 1100;
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+.cgv-overlay.open { display: block; }
+.cgv-box {
+  background: var(--bg);
+  border-radius: 6px;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem 3rem;
+  position: relative;
+  box-shadow: 0 4px 40px rgba(32,38,41,0.3);
+}
+.cgv-close {
+  position: absolute;
+  top: 1rem; right: 1.2rem;
+  background: none; border: none;
+  font-size: 1.6rem;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+  line-height: 1;
+}
+.cgv-close:hover { opacity: 1; }
+.cgv-box h2 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.cgv-date {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.cgv-box h3 {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 1.8rem 0 0.5rem;
+  border-top: 1px solid var(--soft);
+  padding-top: 1.2rem;
+}
+.cgv-box p {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.cgv-box em { font-style: normal; font-weight: 600; }
+@media (max-width: 600px) {
+  .cgv-box { padding: 1.8rem 1.2rem 2rem; }
+}
+
+/* ============================================
+   FOOTER UPDATE
+   ============================================ */
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+}
+.footer-links a, .footer-links button {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: rgba(246,242,236,0.45);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+.footer-links a:hover, .footer-links button:hover { color: var(--bg); }
+.footer-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.footer-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: rgba(246,242,236,0.1);
+  border: 1px solid rgba(246,242,236,0.18);
+  border-radius: 3px;
+  padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.footer-contact-btn:hover { background: rgba(246,242,236,0.18); }
+.footer-contact-btn.wa { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.footer-contact-btn.wa:hover { background: rgba(74,222,128,0.1); }
+
+/* ============================================
    FOOTER
    ============================================ */
 footer {
@@ -2432,6 +2624,21 @@ footer .footer-tag {
 <div class="bg-eluma">ELUMA</div>
 
 <!-- ============================================
+     NAV STICKY
+     ============================================ -->
+<nav class="site-nav" id="siteNav" role="navigation" aria-label="Navigation principale">
+  <a href="#" class="site-nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">ELUMA<span>.</span></a>
+  <ul class="site-nav-links">
+    <li><a href="#section-miroir">Tu te reconnais ?</a></li>
+    <li><a href="#section-offre">L'offre</a></li>
+    <li><a href="#section-preuves">Ils témoignent</a></li>
+    <li><a href="#section-qualifier">C'est pour toi ?</a></li>
+    <li><a href="#section-faq">Tes questions</a></li>
+  </ul>
+  <a href="#cta-final" class="site-nav-cta">Réserver mon pré-audit</a>
+</nav>
+
+<!-- ============================================
      HEADER. ACCROCHE
      ============================================ -->
 <header class="header">
@@ -2464,7 +2671,7 @@ footer .footer-tag {
 <!-- ============================================
      SECTION 2. AMPLIFICATION (les douleurs)
      ============================================ -->
-<section class="section">
+<section id="section-miroir" class="section">
   <div class="section-label-wrap rev">
     <div class="section-line"></div>
     <span class="section-label">01 . Le miroir</span>
@@ -2711,7 +2918,7 @@ footer .footer-tag {
 <!-- ============================================
      SECTION 5. LA FORGE (l'offre)
      ============================================ -->
-<section class="section">
+<section id="section-offre" class="section">
   <div class="section-label-wrap rev">
     <div class="section-line"></div>
     <span class="section-label">03 . La Forge</span>
@@ -2910,7 +3117,7 @@ footer .footer-tag {
 <!-- ============================================
      SECTION 6. PREUVES
      ============================================ -->
-<section class="section">
+<section id="section-preuves" class="section">
   <div class="section-label-wrap rev">
     <div class="section-line"></div>
     <span class="section-label">04 . Les preuves</span>
@@ -3036,7 +3243,7 @@ footer .footer-tag {
 <!-- ============================================
      SECTION 7. POUR TOI / PAS POUR TOI
      ============================================ -->
-<section class="section">
+<section id="section-qualifier" class="section">
   <div class="section-label-wrap rev">
     <div class="section-line"></div>
     <span class="section-label">05 . Qualifier</span>
@@ -3152,7 +3359,7 @@ footer .footer-tag {
 <!-- ============================================
      SECTION 10. FAQ
      ============================================ -->
-<section class="section">
+<section id="section-faq" class="section">
   <div class="section-label-wrap rev">
     <div class="section-line"></div>
     <span class="section-label">06 . Questions</span>
@@ -3266,9 +3473,97 @@ footer .footer-tag {
      ============================================ -->
 <footer>
   <div class="footer-logo">ELUMA<span>.</span></div>
-  <p>ELUMA SRL . Belgique . La Forge . L'associé que tu n'as pas encore recruté.</p>
+  <p>ELUMA SRL . BCE 1021.707.037 . Belgique</p>
   <p class="footer-tag">"Et si c'était toi la solution..."</p>
+  <div class="footer-contact-row">
+    <a href="mailto:mehdi.benlahoucine@eluma.be" class="footer-contact-btn">✉ mehdi.benlahoucine@eluma.be</a>
+    <a href="https://wa.me/32XXXXXXXXX" target="_blank" rel="noopener" class="footer-contact-btn wa">WhatsApp</a>
+  </div>
+  <div class="footer-links">
+    <button onclick="openCGV()">Conditions Générales de Vente</button>
+    <a href="mailto:mehdi.benlahoucine@eluma.be">Contact</a>
+    <span style="color:rgba(246,242,236,0.2)">·</span>
+    <span style="font-size:0.75rem;color:rgba(246,242,236,0.3);">© 2026 ELUMA SRL — Tous droits réservés</span>
+  </div>
 </footer>
+
+<!-- ============================================
+     CGV MODAL
+     ============================================ -->
+<div class="cgv-overlay" id="cgvModal" onclick="closeCGVOutside(event)">
+  <div class="cgv-box">
+    <button class="cgv-close" onclick="closeCGV()" aria-label="Fermer">×</button>
+    <h2>Conditions Générales de Vente</h2>
+    <p class="cgv-date">ELUMA SRL — En vigueur à compter du 7 avril 2026</p>
+
+    <h3>Article 1 — Identification du prestataire</h3>
+    <p>ELUMA SRL — Société à responsabilité limitée de droit belge<br>
+    BCE : 1021.707.037 · TVA : BE 1021.707.037<br>
+    Siège social : 109 rue Tout Va Bien, 4420 Saint-Nicolas, Belgique<br>
+    Représentant légal : Mehdi Benlahoucine, gérant<br>
+    Contact : mehdi.benlahoucine@eluma.be</p>
+
+    <h3>Article 2 — Objet et champ d'application</h3>
+    <p>Les présentes CGV s'appliquent à l'ensemble des prestations de services proposées par ELUMA SRL, notamment : La Pioche (audit stratégique personnalisé), La Forge Essentielle, La Forge Avancée, La Forge Intégrale, et toute prestation de consulting ad hoc convenue entre les parties.</p>
+    <p>Toute commande implique l'acceptation pleine et entière des présentes CGV.</p>
+
+    <h3>Article 3 — Modalités de commande</h3>
+    <p>La commande est réputée acceptée dès la réception du paiement convenu selon les modalités définies à l'article 5. Avant toute prestation d'accompagnement (La Forge), un entretien préalable est organisé pour valider l'adéquation entre les besoins du Client et l'offre proposée. Cet entretien ne constitue pas un engagement contractuel.</p>
+    <p><em>Contrats à distance :</em> les dispositions du Livre VI, Titre III du Code de droit économique belge s'appliquent. Les informations précontractuelles prévues à l'article VI.45 CDE sont fournies avant la conclusion du contrat.</p>
+    <p><em>Contrats en présentiel :</em> les dispositions spécifiques aux contrats à distance ne s'appliquent pas. Les présentes CGV s'appliquent néanmoins dans leur intégralité.</p>
+
+    <h3>Article 4 — Description des prestations</h3>
+    <p><em>La Pioche :</em> Audit comprenant un questionnaire approfondi, une analyse personnalisée du fondateur et de son business, et la livraison d'un document stratégique actionnable. Inclut un outil IA personnalisé adapté au profil du Client.</p>
+    <p><em>La Forge :</em> Accompagnement structuré en deux phases : un Sprint intensif (4 à 8 semaines) suivi d'une période d'Ancrage (4 à 8 semaines). Le contenu, les livrables et le rythme des sessions sont définis dans une fiche de mission remise au démarrage. Les trois tiers se distinguent par la profondeur d'audit, le nombre de sessions, l'intégration d'outils et l'inclusion d'un module dédié au cercle d'influence du Client. Le détail de chaque tier est présenté avant toute commande.</p>
+    <p><em>Consulting ad hoc :</em> Prestations ponctuelles dont le périmètre, la durée et le tarif sont convenus au cas par cas. Un devis écrit est fourni avant le démarrage.</p>
+
+    <h3>Article 5 — Tarifs et conditions de paiement</h3>
+    <p>Les tarifs sont ceux communiqués au Client au moment de la commande. Tous les prix s'entendent hors TVA, sauf mention contraire. La TVA applicable est celle en vigueur au jour de la facturation.</p>
+    <p>Moyens de paiement acceptés : virement bancaire, carte de crédit/débit via Stripe ou Mollie.</p>
+    <p>Tout retard de paiement entraîne de plein droit un intérêt de retard au taux légal belge, majoré d'une indemnité forfaitaire de 40 € pour frais de recouvrement, conformément à la loi du 2 août 2002.</p>
+
+    <h3>Article 6 — Droit de rétractation</h3>
+    <p>Le Client consommateur concluant un contrat à distance dispose d'un délai de 14 jours calendrier pour exercer son droit de rétractation, sans motif ni pénalité (Livre VI, art. VI.47 CDE).</p>
+    <p>Le Client peut demander que la prestation commence avant l'expiration de ce délai. Cette demande expresse vaut renonciation au droit de rétractation une fois la prestation pleinement exécutée (art. VI.53, 1° CDE). Si la prestation a débuté mais n'est pas achevée, le Client reste redevable d'un montant proportionnel au service déjà fourni.</p>
+    <p>Pour les clients professionnels (B2B), le droit de rétractation ne s'applique pas, sauf accord contraire écrit.</p>
+
+    <h3>Article 7 — Annulation, report et déchéance</h3>
+    <p>Toute annulation doit être communiquée par écrit à mehdi.benlahoucine@eluma.be.</p>
+    <p><em>La Pioche :</em> prestation intellectuelle débutant dès réception du paiement. Aucun remboursement une fois l'analyse commencée, sauf motif exceptionnel justifié (hospitalisation, décès d'un proche sur justificatif).</p>
+    <p><em>La Forge :</em> remboursement à 100 % avant démarrage du Sprint. Après démarrage : les sessions effectuées et livrables remis restent acquis ; le solde des sessions non réalisées est remboursé au prorata. En phase d'Ancrage : aucun remboursement, l'Ancrage étant inclus dans le forfait global.</p>
+    <p><em>Report de session :</em> possible avec 24 h de préavis minimum. En deçà, la session est considérée comme effectuée.</p>
+    <p><em>Déchéance pour absence :</em> après mise en demeure restée sans réponse sous 15 jours calendrier, le contrat est résilié du fait du Client. Les sommes versées restent acquises au titre des prestations exécutées et de la réservation de disponibilité.</p>
+
+    <h3>Article 8 — Obligations des parties</h3>
+    <p><em>Prestataire :</em> exécution avec diligence et professionnalisme. Obligation de moyens, non de résultat. Aucun résultat financier, commercial ou personnel spécifique n'est garanti.</p>
+    <p><em>Client :</em> fournir les informations nécessaires, participer activement, respecter les échéances de paiement. Le Client est seul responsable des décisions prises dans le cadre de son activité.</p>
+
+    <h3>Article 9 — Confidentialité</h3>
+    <p>Chaque partie s'engage à traiter comme confidentielles toutes les informations reçues de l'autre dans le cadre de la prestation. Cette obligation s'étend 2 ans après la fin de la relation contractuelle. Le Prestataire peut, avec accord écrit préalable du Client, utiliser son nom ou témoignage à des fins de communication commerciale.</p>
+
+    <h3>Article 10 — Propriété intellectuelle</h3>
+    <p>Les méthodes, outils, frameworks, templates et contenus développés par ELUMA SRL restent sa propriété exclusive. Le Client bénéficie d'une licence d'utilisation personnelle, non exclusive et non cessible des livrables produits. Les contenus produits par le Client avec les outils fournis restent sa propriété.</p>
+
+    <h3>Article 11 — Responsabilité</h3>
+    <p>La responsabilité du Prestataire est limitée au montant total des sommes versées pour la prestation concernée, sauf faute grave ou intentionnelle. Le Prestataire n'est pas responsable des dommages indirects ni des décisions prises par le Client suite à l'accompagnement.</p>
+
+    <h3>Article 12 — Protection des données personnelles</h3>
+    <p>Les données collectées (identité, coordonnées, informations business, réponses aux questionnaires) sont strictement nécessaires à l'exécution de la prestation et ne sont pas transmises à des tiers, sauf obligation légale. Elles sont conservées pendant la durée de la prestation et 3 ans après sa fin. Droits d'accès, rectification, effacement et portabilité : mehdi.benlahoucine@eluma.be.</p>
+
+    <h3>Article 13 — Utilisation d'outils d'intelligence artificielle</h3>
+    <p>Le Prestataire utilise des outils d'intelligence artificielle comme levier de productivité. Le Client consent à ce que certaines données transmises soient traitées par ces outils. Les outputs générés sont systématiquement revus et validés par le Prestataire avant livraison.</p>
+
+    <h3>Article 14 — Force majeure</h3>
+    <p>Aucune partie n'est responsable de l'inexécution de ses obligations en cas de force majeure (maladie grave, catastrophe, pandémie, décision gouvernementale, etc.). Si la force majeure excède 30 jours, chaque partie peut résilier le contrat sans indemnité, sous réserve du paiement des prestations réalisées.</p>
+
+    <h3>Article 15 — Droit applicable et juridiction</h3>
+    <p>Les présentes CGV sont régies par le droit belge. En cas de litige non résolu à l'amiable sous 30 jours, compétence exclusive des tribunaux de l'entreprise de Liège, division Liège.</p>
+
+    <h3>Article 16 — Dispositions diverses</h3>
+    <p>Si une clause est déclarée nulle, les autres restent en vigueur. Le Prestataire se réserve le droit de modifier les présentes CGV avec notification par email 30 jours avant entrée en vigueur. Les CGV applicables à une commande sont celles en vigueur au moment de ladite commande.</p>
+    <p>En passant commande, le Client reconnaît avoir pris connaissance des présentes CGV, des conditions d'annulation (articles 6 et 7) et consent à l'utilisation d'outils d'intelligence artificielle dans le cadre de la prestation (article 13).</p>
+  </div>
+</div>
 
 <!-- ============================================
      EXIT INTENT MODAL
@@ -3352,6 +3647,40 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     if (!isOpen) item.classList.add('open');
   });
 });
+
+/* Nav sticky — shadow + active link */
+const siteNav = document.getElementById('siteNav');
+const navLinks = document.querySelectorAll('.site-nav-links a');
+window.addEventListener('scroll', () => {
+  siteNav.classList.toggle('scrolled', window.scrollY > 20);
+});
+const navSections = ['section-miroir','section-offre','section-preuves','section-qualifier','section-faq'];
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('nav-active', a.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-56px 0px -60% 0px', threshold: 0 });
+navSections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) navObserver.observe(el);
+});
+
+/* CGV modal */
+function openCGV() {
+  document.getElementById('cgvModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCGV() {
+  document.getElementById('cgvModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeCGVOutside(e) {
+  if (e.target === document.getElementById('cgvModal')) closeCGV();
+}
 
 /* Spouse options toggle — Q1 : seul ou pas seul */
 function toggleSpouseQ1(el, answer) {
